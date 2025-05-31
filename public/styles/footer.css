@@ -1,0 +1,129 @@
+/* Footer Container */
+.form--legalFooter--SaZVO {
+    background-color: #ffffff;
+    padding: 40px 16px 30px;
+    text-align: center;
+    font-size: 18px;
+    color: #666666;
+}
+
+/* Footer Link Styling */
+.form--legalFooter--SaZVO a {
+    color: #257eba;
+    text-decoration: none;
+}
+
+.form--legalFooter--SaZVO a:hover {
+    text-decoration: underline;
+}
+
+/* Helper Row Layout */
+.form--helperText--V2kC4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Image Styling */
+.form--helperText--V2kC4 img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+/* Text + Icon Block */
+.form--helperText--V2kC4 span {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    color: #666666;
+    line-height: 1.5;
+}
+
+/* Circle Icon */
+.form--checkCircle--3Rxe3 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0194c1;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+/* SVG inside check circle */
+.form--checkCircle--3Rxe3 svg {
+    width: 12px;
+    height: 12px;
+    stroke: white;
+}
+
+/*2nd footer*/
+
+.form--footerSection--fpf5T {
+    margin-top: auto;
+    padding: 20px 0;
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+}
+
+.container-footer {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.form--logoGroup--x0fPr {
+    color: var(--color4, #888);
+    font-size: 12px;
+    text-align: center;
+}
+
+.form--logoGroup--x0fPr h4 {
+    margin-bottom: 16px;
+    color: #124476;
+    font-size: 18px;
+    font-family: "Helvetica Neue", SansSerif;
+}
+
+.form--logoGroupRow {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.form--logoGroupRow img {
+    height: 80px;
+    width: auto;
+    max-width: 100px;
+    object-fit: contain;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.form--logoGroupRow img:hover {
+    opacity: 1;
+}
+
+.form--logoGroup--x0fPr p {
+    margin-top: 10px;
+    color: var(--color4, #888);
+}
+
+.form--logoGroup--x0fPr a {
+    color: var(--color4, #888);
+    text-decoration: underline;
+    font-size: 12px;
+}

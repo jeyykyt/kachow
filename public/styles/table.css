@@ -1,0 +1,242 @@
+.container-main {
+    margin: 0 auto;
+    padding: 0 15px;
+    max-width: 1140px;
+}
+
+.makes-container {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.make-card {
+    background-color: var(--color1, #fff);
+    border: 2px solid var(--color5, #dcdcdc);
+    box-shadow: 0 2px 5px rgba(var(--color2-rgb, 0, 0, 0), 0.1);
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.make-card img {
+    max-height: 90px;
+    width: 90px;
+    margin-bottom: 10px;
+}
+
+.make-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #124476;
+}
+
+.make-card:hover {
+    .make-name{
+    color: #46c2e8;
+    }
+}
+@media (max-width: 575px) {
+    .make-card {
+        border-radius: 0;
+        margin: 10px 0;
+        padding: 12px 0px;
+    }
+}
+@media (min-width: 1201px) {
+    .make-card {
+        border-radius: 0;
+        margin: 10px 0;
+        padding: 0px 12px 10px;
+    }
+
+    .make-card img {
+        height: 90px;
+        width: 90px;
+        margin-bottom: 10px;
+    }
+
+}
+
+/*H1*/
+
+
+.header-row-center {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 44px; /* At least as tall as your button */
+}
+
+.header-back-abs {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.center-title {
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Dropdown Container */
+
+/* Card-like box for the dropdown */
+.dropdown-card {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+border-color: hsl(0, 0%, 80%);
+}
+
+/* Custom select styling with arrow */
+.dropdown-select {
+    width: 100%;
+    height: 64px;
+    padding: 0 44px 0 20px;
+    font-size: 1.15rem;
+    border: 1px solid #CCC;
+    border-radius: 8px;
+    background: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    position: relative;
+    /* Downward arrow (default) */
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2312172A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1.2rem center;
+    background-size: 24px 24px;
+    transition: border-color 0.2s;
+}
+
+/* On focus: rotate the arrow upward */
+.dropdown-select:focus {
+    border-color: #124476;
+    outline: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2312172A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='6 15 12 9 18 15'/%3E%3C/svg%3E");
+}
+
+/* Remove IE arrow */
+.dropdown-select::-ms-expand {
+    display: none;
+}
+
+/*year*/
+
+/* ----- Responsive Back Button Visibility ----- */
+.d-desktop-header {
+    display: flex !important;
+
+}
+.d-mobile-back {
+    display: none !important;
+}
+
+
+
+/* ----- Year Pills Styling ----- */
+.form--optionPill--aoYkm {
+    align-items: center;
+    background-color: var(--color6, #e7e7e7);
+    border: 1px solid var(--color6, #e7e7e7);
+    border-radius: 2px;
+    color: #124476;
+    cursor: pointer;
+    display: flex;
+    font-weight: 700;
+    justify-content: center;
+    margin: 5px;
+    min-width: 120px;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background 0.2s, color 0.2s;
+}
+
+
+
+.form--btnNo--JEgGg {
+    font-size: 13px;
+    line-height: 24px;
+    margin: 32px auto 0;
+    text-decoration: underline;
+    text-transform: none;
+    width: max-content;
+    text-align: center;
+    color: #124476;
+
+}
+.form--btnNo--JEgGg:hover{
+    cursor: pointer;
+}
+
+.form--optionPill--aoYkm:hover {
+    background: #46C2E8;
+    color: #fff;
+}
+
+/* ----- Default (Desktop) Back Button Styling ----- */
+.BackButton--back--qwJFl {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    justify-content: center;
+    outline: none;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.BackButton--back--qwJFl .arrow-wrapper {
+    display: inline-flex;
+    transition: transform 0.2s cubic-bezier(0.5, 1, 0.5, 1);
+}
+.BackButton--back--qwJFl:hover .arrow-wrapper {
+    transform: translateX(-3px);
+}
+
+/* ----- Mobile-Only Back Button Styling ----- */
+.BackButton--back--mobile {
+    align-items: center;
+    border: 1px solid var(--color4, #888);
+    border-radius: 50px;
+    display: inline-flex;
+    margin-top: 40px;
+    min-width: 150px;
+    padding: 19px;
+    position: relative;
+    background: transparent;
+}
+
+/* Hide the mobile-styled back button on desktop, as extra insurance */
+
+
+/* ----- Centered container for mobile back button ----- */
+.form--centeredBackBtn--uPc3O {
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 1025px) {
+    .d-desktop-header {
+        display: none !important;
+    }
+    .d-mobile-back {
+        display: flex !important;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 1026px) {
+    .BackButton--back--mobile {
+        display: none !important;
+    }
+}

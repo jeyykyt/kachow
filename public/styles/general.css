@@ -1,0 +1,19 @@
+p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+body{
+
+    background-color: #ffffff;
+    font-family: "Helvetica Neue", SansSerif;
+}
+
+@media (min-width: 1201px){
+    body{
+        padding-left: 160px;
+        padding-right: 160px;
+
+    }
+
+}
