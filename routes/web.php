@@ -39,7 +39,9 @@ Route::get(
 Route::get(
     '/makes/{make}/years/{year}/models/{model}/trims/{trim}/own',
     [MakeController::class, 'showOwn']
-)->name('make.own');
+)
+    ->where('trim', '.*')   // ← this allows “{trim}” to contain “%2F” or any characters
+    ->name('make.own');
 
 // STEP 4.6: Handle the form POST to save a vehicle
 Route::post(

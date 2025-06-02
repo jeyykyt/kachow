@@ -48,20 +48,15 @@
             </a>
         @else
             @foreach($trims as $trim)
-                <div class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU mb-3">
-                    <a
-                        href="{{ route('make.own', [
-        'make'  => $make->id,
-        'year'  => $selectedYear,
-        'model' => $modelObj->id,
-        'trim'  => $trim,
-      ]) }}"
-                        class="d-block text-center text-decoration-none"
-                        style="color: inherit;"
-                    >
+                <a href="{{ route('make.own', [
+      'make'  => $make->id,
+      'year'  => $selectedYear,
+      'model' => $modelObj->id,
+      'trim'  => $trim,
+                  ]) }}" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU mb-3 text-center text-decoration-none">
+
                         {{ $trim }}
-                    </a>
-                </div>
+                </a>
             @endforeach
         @endif
 
