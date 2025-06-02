@@ -4,77 +4,40 @@
 
     <!-- Wrap this in d-desktop-header -->
     <div class="header-row-center mb-4">
-        <button type="button" class="d-desktop-header BackButton--back--qwJFl header-back-abs">
-        <span class="arrow-wrapper">
-            <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
-                <g fill="none" fill-rule="evenodd">
-                    <path stroke="#124476" stroke-width="2" d="M14 20.485L22.485 12h0L14 3.515"></path>
-                    <path stroke="#124476" stroke-width="2" stroke-linecap="square" d="M1 12.5h20"></path>
-                </g>
-            </svg>
-        </span>
-            <span style="font-size: 17px">Back</span>
-        </button>
+        <a      href="{{ route('make.index', ['selected' => $make->id]) }}"
+                style="text-decoration: none; color: inherit;">
+            <button type="button" class="d-desktop-header BackButton--back--qwJFl header-back-abs">
+            <span class="arrow-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
+                    <g fill="none" fill-rule="evenodd">
+                        <path stroke="#124476" stroke-width="2" d="M14 20.485L22.485 12h0L14 3.515"></path>
+                        <path stroke="#124476" stroke-width="2" stroke-linecap="square" d="M1 12.5h20"></path>
+                    </g>
+                </svg>
+            </span>
+                <span style="font-size: 17px">Back</span>
+            </button>
+        </a>
         <h1 class="mb-0 center-title" style="color: #124476;">Vehicle Year</h1>
     </div>
 
 
-    <div class="d-flex flex-wrap justify-content-center form--gridify--N3uth">
-        <!-- YEAR PILLS -->
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-
+    <div class="d-flex flex-wrap justify-content-center form--gridify--N3uth mb-4">
+        @if($years->isEmpty())
+            <div class="text-muted">No years available for {{ strtoupper($make->name) }}</div>
+        @else
+            @foreach($years as $year)
+                <a
+                    href="{{ route('make.models', ['make' => $make->id, 'year' => $year]) }}"
+                    class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm m-1 text-center text-decoration-none"
+                >
+                    {{ $year }}
+                </a>
+            @endforeach
+        @endif
     </div>
 
+    <a  href="{{ route('make.index', ['selected' => $make->id]) }}" style="text-decoration: none; color: inherit;">
     <div class="form--centeredBackBtn--uPc3O d-mobile-back mt-4">
         <button type="button" class="BackButton--back--qwJFl BackButton--back--mobile">
             <span class="arrow-wrapper">
@@ -88,6 +51,7 @@
             <span style="font-size: 17px">Back</span>
         </button>
     </div>
+    </a>
 </div>
 
 <style>

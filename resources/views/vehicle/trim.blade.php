@@ -3,38 +3,12 @@
 
     <!-- Wrap this in d-desktop-header -->
     <div class="header-row-center mb-4">
-        <button type="button" class=" d-desktop-header BackButton--back--qwJFl header-back-abs">
-        <span class="arrow-wrapper">
-            <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
-                <g fill="none" fill-rule="evenodd">
-                    <path stroke="#124476" stroke-width="2" d="M14 20.485L22.485 12h0L14 3.515"></path>
-                    <path stroke="#124476" stroke-width="2" stroke-linecap="square" d="M1 12.5h20"></path>
-                </g>
-            </svg>
-        </span>
-            <span style="font-size: 17px">Back</span>
-        </button>
-        <h1 class="mb-0 center-title" style="color: #124476;">Vehicle Trim</h1>
-    </div>
+        <a href="{{ route('make.models', [
+        'make' => $make->id,
+        'year' => $selectedYear,
+      ]) }}" style="text-decoration: none; color: inherit;">
 
-    <div class="d-flex flex-wrap justify-content-center form--gridify--N3uth">
-        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">Not Sure</div>
-        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">Not Sure</div>
-
-        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">Not Sure</div>
-
-        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">Not Sure</div>
-
-
-
-
-
-
-    </div>
-
-
-    <div class="form--centeredBackBtn--uPc3O d-mobile-back mt-4">
-        <button type="button" class="BackButton--back--qwJFl BackButton--back--mobile">
+            <button type="button" class=" d-desktop-header BackButton--back--qwJFl header-back-abs">
             <span class="arrow-wrapper">
                 <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
                     <g fill="none" fill-rule="evenodd">
@@ -43,8 +17,74 @@
                     </g>
                 </svg>
             </span>
-            <span style="font-size: 17px">Back</span>
-        </button>
+                <span style="font-size: 17px">Back</span>
+            </button>
+        </a>
+        <h1 class="mb-0 center-title" style="color: #124476;">Vehicle Trim</h1>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-center form--gridify--N3uth mb-4">
+
+        @if($trims->isEmpty())
+            {{-- 1a) Show the message as a full-width row (w-100) --}}
+            <div class="w-100 text-center mb-3">
+                <p class="text-muted">
+                    No trims available for
+                    <strong>{{ strtoupper($make->name) }} {{ $selectedYear }} {{ strtoupper($modelObj->name) }}</strong>.
+                </p>
+            </div>
+
+            {{-- 1b) Now emit your “Continue” pill exactly where a real trim would go --}}
+            <a
+                href="{{ route('make.own', [
+          'make'  => $make->id,
+          'year'  => $selectedYear,
+          'model' => $modelObj->id,
+            'trim' => 'none',
+        ]) }}"
+                class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU mb-3 text-center text-decoration-none"
+            >
+                Continue without selecting trim
+            </a>
+        @else
+            @foreach($trims as $trim)
+                <div class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU mb-3">
+                    <a
+                        href="{{ route('make.own', [
+        'make'  => $make->id,
+        'year'  => $selectedYear,
+        'model' => $modelObj->id,
+        'trim'  => $trim,
+      ]) }}"
+                        class="d-block text-center text-decoration-none"
+                        style="color: inherit;"
+                    >
+                        {{ $trim }}
+                    </a>
+                </div>
+            @endforeach
+        @endif
+
+    </div>
+
+
+    <div class="form--centeredBackBtn--uPc3O d-mobile-back mt-4">
+        <a  href="{{ route('make.models', [
+        'make' => $make->id,
+        'year' => $selectedYear,
+      ]) }}" style="text-decoration: none; color: inherit;">
+            <button type="button" class="BackButton--back--qwJFl BackButton--back--mobile">
+                <span class="arrow-wrapper">
+                    <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
+                        <g fill="none" fill-rule="evenodd">
+                            <path stroke="#124476" stroke-width="2" d="M14 20.485L22.485 12h0L14 3.515"></path>
+                            <path stroke="#124476" stroke-width="2" stroke-linecap="square" d="M1 12.5h20"></path>
+                        </g>
+                    </svg>
+                </span>
+                <span style="font-size: 17px">Back</span>
+            </button>
+        </a>
     </div>
 </div>
 
