@@ -69,12 +69,10 @@
                 </ul>
                 <input type="hidden" name="state" id="state" />
             </div>
-
-
         </div>
 
         <!-- City -->
-        <div class="custom-floating-label-input" style="padding-bottom: 25px">
+        <div class="custom-floating-label-input" style="margin-bottom: 18px">
             <input id="city" name="city" type="text" placeholder="e.g. Vancouver" required />
             <label for="city">City</label>
             <span class="custom-input-error"></span>
@@ -109,6 +107,8 @@
 
 
 </div>
+
+
 
 <style>
 

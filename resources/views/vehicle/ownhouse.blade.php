@@ -4,7 +4,7 @@
 
     <!-- Wrap this in d-desktop-header -->
     <div class="header-row-center mb-4">
-        <button type="button" class=" d-desktop-header BackButton--back--qwJFl header-back-abs">
+        <button   onclick="window.history.back()" type="button" class=" d-desktop-header BackButton--back--qwJFl header-back-abs">
         <span class="arrow-wrapper">
             <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
                 <g fill="none" fill-rule="evenodd">
@@ -20,17 +20,31 @@
 
 
 
-    <div class="d-flex flex-wrap justify-content-center form--gridify--N3uth">
-        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">YES</div>
-        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">NO</div>
+    <form action="{{ route('quote.storeOwnHouse') }}" method="POST">
+        @csrf
 
+        <div class="d-flex flex-wrap justify-content-center form--gridify--N3uth mb-4">
+            <button
+                type="submit"
+                name="own_house"
+                value="1"
+                class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU mb-3"
+                style="text-align: center;"
+            >
+                YES
+            </button>
 
-
-
-
-
-
-    </div>
+            <button
+                type="submit"
+                name="own_house"
+                value="0"
+                class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU mb-3"
+                style="text-align: center;"
+            >
+                NO
+            </button>
+        </div>
+    </form>
 
 
     <div class="form--centeredBackBtn--uPc3O d-mobile-back mt-4">

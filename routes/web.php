@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DriverController;
 use App\Http\Controllers\MakeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuoteController;
@@ -51,3 +52,25 @@ Route::post(
 
 Route::get('/quote/details', [QuoteController::class, 'showDetailsForm'])->name('quote.details');
 Route::post('/quote/details', [QuoteController::class, 'saveDetails'])->name('quote.save');
+
+
+Route::post('/quote/store-insured', [QuoteController::class, 'storeInsured'])
+    ->name('quote.storeInsured');
+
+// 2) “Do you own a house?” step
+Route::post('/quote/store-own-house', [QuoteController::class, 'storeOwnHouse'])
+    ->name('quote.storeOwnHouse');
+
+// DRIVER
+
+Route::post('/driver/store-gender', [DriverController::class, 'storeGender'])
+    ->name('driver.storeGender');
+
+Route::post('/driver/store-birthdate', [DriverController::class, 'storeBirthdate'])
+    ->name('driver.storeBirthdate');
+
+// 3) Step 3: “Driver Details” (first name, last name, served military, relationship)
+Route::post('/driver/store-details', [DriverController::class, 'storeDriverDetails'])
+    ->name('driver.storeDetails');
+
+
