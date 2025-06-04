@@ -1434,6 +1434,87 @@
  }
 
  }); // end of DOMContentLoaded
+ // ───────────────────────────────────────────────
+ // IMMEDIATE-PAINT FOR MAKE → YEAR
+ // ───────────────────────────────────────────────
+ document.querySelectorAll('#step-make a.form--optionPill--aoYkm').forEach(function(link) {
+     link.addEventListener('click', function() {
+         const fillElem  = document.querySelector('.progress-bar-fill');
+         const labelElem = document.querySelector('.progress-bar-label');
+         if (fillElem && labelElem) {
+             // “Year” corresponds to 37%
+             fillElem.style.width  = '37%';
+             labelElem.style.left  = '37%';
+             labelElem.textContent = '37%';
+         }
+         // Let the link navigate normally to step=year…
+     });
+ });
+
+ // ───────────────────────────────────────────────
+ // IMMEDIATE-PAINT FOR YEAR → MODEL
+ // ───────────────────────────────────────────────
+ document.querySelectorAll('#step-year a.form--optionPill--aoYkm').forEach(function(link) {
+     link.addEventListener('click', function() {
+         const fillElem  = document.querySelector('.progress-bar-fill');
+         const labelElem = document.querySelector('.progress-bar-label');
+         if (fillElem && labelElem) {
+             // “Model” corresponds to 48%
+             fillElem.style.width  = '48%';
+             labelElem.style.left  = '48%';
+             labelElem.textContent = '48%';
+         }
+     });
+ });
+
+ // ───────────────────────────────────────────────
+ // IMMEDIATE-PAINT FOR MODEL → TRIM
+ // ───────────────────────────────────────────────
+ document.querySelectorAll('#step-model a.form--optionPill--aoYkm').forEach(function(link) {
+     link.addEventListener('click', function() {
+         const fillElem  = document.querySelector('.progress-bar-fill');
+         const labelElem = document.querySelector('.progress-bar-label');
+         if (fillElem && labelElem) {
+             // “Trim” corresponds to 57%
+             fillElem.style.width  = '57%';
+             labelElem.style.left  = '57%';
+             labelElem.textContent = '57%';
+         }
+     });
+ });
+
+ // ───────────────────────────────────────────────
+ // IMMEDIATE-PAINT FOR TRIM → OWN
+ // ───────────────────────────────────────────────
+ document.querySelectorAll('#step-trim a.form--optionPill--aoYkm').forEach(function(link) {
+     link.addEventListener('click', function() {
+         const fillElem  = document.querySelector('.progress-bar-fill');
+         const labelElem = document.querySelector('.progress-bar-label');
+         if (fillElem && labelElem) {
+             // “Own” corresponds to 59%
+             fillElem.style.width  = '59%';
+             labelElem.style.left  = '59%';
+             labelElem.textContent = '59%';
+         }
+     });
+ });
+
+ // ───────────────────────────────────────────────
+ // IMMEDIATE-PAINT FOR OWN → ADDVEHICLE
+ // ───────────────────────────────────────────────
+ document.querySelectorAll('#step-own button[type="submit"]').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+         const fillElem  = document.querySelector('.progress-bar-fill');
+         const labelElem = document.querySelector('.progress-bar-label');
+         if (fillElem && labelElem) {
+             // “AddVehicle” corresponds to 68%
+             fillElem.style.width  = '68%';
+             labelElem.style.left  = '68%';
+             labelElem.textContent = '68%';
+         }
+         // The form submits, then page reloads to step=addVehicle…
+     });
+ });
 
 
 // // ?????????

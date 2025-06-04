@@ -73,4 +73,6 @@ Route::post('/driver/store-birthdate', [DriverController::class, 'storeBirthdate
 Route::post('/driver/store-details', [DriverController::class, 'storeDriverDetails'])
     ->name('driver.storeDetails');
 
-
+Route::get('/quote1', function () {
+    return view('quote');
+})  ->name('quote1');

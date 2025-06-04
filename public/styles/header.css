@@ -70,7 +70,6 @@
 .progress-bar-fill {
     height: 100%;
     background-color: #00C484;
-    transition: width 0.4s ease-in-out;
 }
 
 .progress-bar-label {
@@ -84,10 +83,22 @@
     padding: 8px 16px;
     position: absolute;
     /* → Animate the label’s “left” instead of its width: */
-    transition: left 0.4s ease-in-out;
     width: fit-content;
 }
 
+.progress-bar-fill {
+    /* only animate width */
+    transition: width 0.4s ease-in-out;
+}
+
+.progress-bar-label {
+    /* animate transform (not left) */
+    transition: transform 0.4s ease-in-out;
+    position: absolute;
+    /* center the label’s horizontal origin so transform works nicely */
+    left: 0;
+    transform: translateX(0%);
+}
 
 .left-section{
     display: flex;
@@ -134,6 +145,33 @@
     padding: 10px 18px;
     text-decoration: none;
     cursor: pointer;
+}
+
+
+    .search-button-quote {
+        font-family: "Helvetica Neue", serif;
+        align-items: center;
+        border: none;
+        border-radius: 4px;
+        display: flex;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 24px;
+        min-width: 100px;
+        padding: 10px 18px;
+        text-decoration: none;
+        cursor: pointer;
+        opacity: 1;
+        background: transparent;
+    }
+
+
+    .search-button-quote:hover {
+            opacity: 0.5;
+            cursor: pointer;
+        background: transparent;
+        transition: opacity 0.3s;
+        }
 
     .call-logo {
         height: 20px;
@@ -270,4 +308,4 @@
         object-position: center;
         cursor: pointer;
     }
-}
+

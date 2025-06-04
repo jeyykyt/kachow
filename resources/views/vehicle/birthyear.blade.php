@@ -26,57 +26,9 @@
 
     <div class="d-flex flex-wrap justify-content-center form--gridify--N3uth">
         <!-- YEAR PILLS -->
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2025</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2024</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
-
-        <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">2023</div>
-
+        @for ($year = 2011; $year >= 1925; $year--)
+            <div role="button" class="col-sm-3 col-md-2 col-lg-2 form--optionPill--aoYkm">{{ $year }}</div>
+        @endfor
 
     </div>
 

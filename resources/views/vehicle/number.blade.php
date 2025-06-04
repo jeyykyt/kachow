@@ -33,10 +33,13 @@
 
         <!-- Button with Badge -->
         <div class="custom-btn-wrapper">
+            <a  href="{{ route('quote1') }}"
+                style="text-decoration: none; color: inherit">
             <button type="button" class="custom-cta-btn">
                 <span class="custom-btn-text">Get My Quote</span>
                 <span class="custom-badge">1</span>
             </button>
+            </a>
         </div>
 
         <!-- Both buttons on one row -->
