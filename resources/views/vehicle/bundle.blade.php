@@ -4,7 +4,7 @@
 
     <!-- Wrap this in d-desktop-header -->
     <div class="header-row-center mb-4">
-        <button onclick="window.history.back()" type="button" class=" d-desktop-header BackButton--back--qwJFl header-back-abs">
+        <button type="button" class=" d-desktop-header BackButton--back--qwJFl header-back-abs">
         <span class="arrow-wrapper">
             <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
                 <g fill="none" fill-rule="evenodd">
@@ -15,24 +15,20 @@
         </span>
             <span style="font-size: 17px">Back</span>
         </button>
-        <div>
-            <h5 class="mb-0 center-title" style="color: #46c2e8; font-size: 14px; font-weight: bold">1ST DRIVER</h5>
-            <h1 class="mb-0 center-title" style="color: #124476;">Gender</h1>
-        </div>
-
+        <h1 class="mb-0 center-title" style="color: #124476;">Bundle Home and Auto and save up to 20%?</h1>
     </div>
 
 
 
     <div class="d-flex flex-wrap justify-content-center form--gridify--N3uth">
-        <div role="button" id="gender-male" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">MALE</div>
-        <div role="button" id="gender-female" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">FEMALE</div>
+        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU next">BUNDLE!</div>
+        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU next">NO THANK YOU</div>
+
     </div>
 
 
-
     <div class="form--centeredBackBtn--uPc3O d-mobile-back mt-4">
-        <button onclick="window.history.back()" type="button" class="BackButton--back--qwJFl BackButton--back--mobile">
+        <button type="button" class="BackButton--back--qwJFl BackButton--back--mobile header-back-abs">
             <span class="arrow-wrapper">
                 <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
                     <g fill="none" fill-rule="evenodd">

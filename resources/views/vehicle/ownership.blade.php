@@ -21,16 +21,9 @@
 
 
     <div class="d-flex flex-wrap justify-content-center form--gridify--N3uth">
-        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU next">OWN</div>
+        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU own">OWN</div>
         <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU next">RENT</div>
         <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU next">OTHER</div>
-
-
-
-
-
-
-
     </div>
 
 

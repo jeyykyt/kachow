@@ -1,5 +1,11 @@
 <div class="container">
-        <h1 class="text-center mb-4" style="color: #124476;">Vehicle Make</h1>
+    <h5
+        class="mb-0 center-title vehicle-title"
+        style="color: #46c2e8; font-size: 14px; font-weight: bold; display: none;"
+    >
+        1ST VEHICLE
+    </h5>
+    <h1 class="text-center mb-4" style="color: #124476;">Vehicle Make</h1>
     <div class="makes-container">
         <div class="row">
             @foreach($featured as $make)

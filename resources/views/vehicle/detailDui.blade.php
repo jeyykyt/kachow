@@ -15,10 +15,8 @@
             <span style="font-size: 17px">Back</span>
         </button>
         <div>
-            <h5 class="mb-0 center-title"
-                style="color: #46c2e8; font-size: 14px; font-weight: bold">
-                1ST DRIVER
-            </h5>
+            <h5 class="mb-0 center-title" style="color: #46c2e8; font-size: 14px; font-weight: bold">1ST DRIVER</h5>
+
             <h1 class="mb-0 center-title" style="color: #124476;">
                 DUI Details
             </h1>

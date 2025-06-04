@@ -3,23 +3,40 @@
     </div>
 
     <!-- Wrap this in d-desktop-header -->
-    <div class="header-row-center mb-4">
-        <a      href="{{ route('make.index', ['selected' => $make->id]) }}"
-                style="text-decoration: none; color: inherit;">
+    <div class="header-row-center mb-4" style="display: flex; align-items: center; justify-content: center;">
+        <!-- Back button (unchanged) -->
+        <a href="{{ route('make.index', ['selected' => $make->id]) }}"
+           style="text-decoration: none; color: inherit; margin-right: 1rem;">
             <button type="button" class="d-desktop-header BackButton--back--qwJFl header-back-abs">
-            <span class="arrow-wrapper">
-                <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
-                    <g fill="none" fill-rule="evenodd">
-                        <path stroke="#124476" stroke-width="2" d="M14 20.485L22.485 12h0L14 3.515"></path>
-                        <path stroke="#124476" stroke-width="2" stroke-linecap="square" d="M1 12.5h20"></path>
-                    </g>
-                </svg>
-            </span>
+      <span class="arrow-wrapper">
+        <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
+          <g fill="none" fill-rule="evenodd">
+            <path stroke="#124476" stroke-width="2" d="M14 20.485L22.485 12h0L14 3.515"></path>
+            <path stroke="#124476" stroke-width="2" stroke-linecap="square" d="M1 12.5h20"></path>
+          </g>
+        </svg>
+      </span>
                 <span style="font-size: 17px">Back</span>
             </button>
         </a>
-        <h1 class="mb-0 center-title" style="color: #124476;">Vehicle Year</h1>
+
+        <!-- Wrapper that stacks H5 above H1 -->
+        <div class="header-text-stack" style="display: flex; flex-direction: column; align-items: center;">
+            <!-- 2ND VEHICLE (h5) -->
+            <h5
+                class="mb-0 center-title vehicle-title"
+                style="color: #46c2e8; font-size: 14px; font-weight: bold; display: none;"
+            >
+                1ST VEHICLE
+            </h5>
+
+            <!-- Main title (h1) -->
+            <h1 class="mb-0 center-title" style="color: #124476; margin-top: 0.25rem;">
+                Vehicle Year
+            </h1>
+        </div>
     </div>
+
 
 
     <div class="d-flex flex-wrap justify-content-center form--gridify--N3uth mb-4">
