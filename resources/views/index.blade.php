@@ -23,6 +23,10 @@
             text-transform: uppercase;
         }
     </style>
+    <script>
+        // Expose the current PHP $step as a JS variable.
+        window.currentStep = "{{ $step }}";
+    </script>
 </head>
 <body>
 
@@ -208,19 +212,6 @@
     {{--    @include('vehicle.email')--}}
     {{--    @include('vehicle.number')--}}
 
-    <section class="form--legalFooter--SaZVO">
-        <div class="form--helperText--V2kC4">
-            <img src="{{ asset('thumbnails/lady.png') }}">
-            <span style="font-weight: normal">
-            <div class="form--checkCircle--3Rxe3">
-                <svg viewBox="0 0 20 20" fill="none">
-                    <path d="M6 10.156L8.9 13 14 8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            Tell us what car you drive and we’ll look for the best rates
-        </span>
-        </div>
-    </section>
 
     <section class="form--footerSection--fpf5T">
         <div class="container-footer">
@@ -245,6 +236,61 @@
 
 </main>
 <script>
+    //PROGRESS BAR
+    document.addEventListener('DOMContentLoaded', function() {
+        // Map “step → percent”
+        const stepToPercent = {
+            make: 25,
+            year: 37,
+            model: 48,
+            trim: 57,
+            own: 59,
+            addVehicle: 68,
+            insured: 79,
+            ownHouse: 81,
+            gender: 87,
+            birthmonth: 88,
+            birthday: 90,
+            birthyear: 91,
+            married: 93,
+            incident: 94,
+            name: 96,
+            addDriver: 96,
+            address: 97,
+            ownership: 97,
+            email: 98,
+            number: 99
+        };
+
+        // 1) Determine current step’s percent
+        const curStep = window.currentStep || '';
+        const currentPercent = stepToPercent[curStep] || 0;
+
+        // 2) Read “maxProgress” from localStorage (default 0)
+        let maxProgress = parseInt(localStorage.getItem('maxProgress') || '0', 10);
+        if (isNaN(maxProgress)) {
+            maxProgress = 0;
+        }
+
+        // 3) If we advanced, update localStorage
+        if (currentPercent > maxProgress) {
+            maxProgress = currentPercent;
+            localStorage.setItem('maxProgress', maxProgress.toString());
+        }
+
+        // 4) Render the bar at maxProgress%
+        const fillElem  = document.querySelector('.progress-bar-fill');
+        const labelElem = document.querySelector('.progress-bar-label');
+        if (fillElem && labelElem) {
+            fillElem.style.width = maxProgress + '%';
+            labelElem.style.right = maxProgress + '%';
+            labelElem.textContent = maxProgress + '%';
+        }
+
+    });
+
+
+
 //ADD VEHICLE LABEL
 
 document.addEventListener('DOMContentLoaded', function() {

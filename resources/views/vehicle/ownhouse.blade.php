@@ -15,7 +15,7 @@
         </span>
             <span style="font-size: 17px">Back</span>
         </button>
-        <h1 class="mb-0 center-title" style="color: #124476;">Do You Own A House?</h1>
+        <h1 class="mb-0 center-title" style="color: #124476;">Do You Own A Home?</h1>
     </div>
 
 
@@ -61,7 +61,8 @@
         </button>
     </div>
 </div>
-
+<div style="height: 50px">
+</div>
 <style>
     @media (max-width: 1025px) {
         .d-desktop-header {
