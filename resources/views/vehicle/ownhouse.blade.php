@@ -48,7 +48,7 @@
 
 
     <div class="form--centeredBackBtn--uPc3O d-mobile-back mt-4">
-        <button type="button" class="BackButton--back--qwJFl BackButton--back--mobile">
+        <button onclick="window.history.back()" type="button" class="BackButton--back--qwJFl BackButton--back--mobile">
             <span class="arrow-wrapper">
                 <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
                     <g fill="none" fill-rule="evenodd">

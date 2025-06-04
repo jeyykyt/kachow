@@ -176,12 +176,25 @@
         </span>
             </a></div>
         <div class="button-row-flex">
+
+            <button type="button" class="left-btn">
+            <span class="arrow-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
+                    <g fill="none" fill-rule="evenodd">
+                        <path stroke="#124476" stroke-width="2" d="M14 20.485L22.485 12h0L14 3.515"></path>
+                        <path stroke="#124476" stroke-width="2" stroke-linecap="square" d="M1 12.5h20"></path>
+                    </g>
+                </svg>
+            </span>
+            </button>
             <button type="button" class="form--tertiary--nncFY TertiaryButton--tertiary--AsvEe right-btn">
         <span class="arrow-wrapper">
           <svg width="24" height="24" viewBox="0 0 24 24">
             <g fill="none" fill-rule="evenodd">
-              <path stroke="#fff" stroke-width="2" d="M14 20.485L22.485 12h0L14 3.515"></path>
-              <path stroke="#fff" stroke-width="2" stroke-linecap="square" d="M1 12.5h20"></path>
+              <path stroke="#fff" stroke-width="2"
+                    d="M14 20.485L22.485 12h0L14 3.515"></path>
+              <path stroke="#fff" stroke-width="2" stroke-linecap="square"
+                    d="M1 12.5h20"></path>
             </g>
           </svg>
         </span>

@@ -599,21 +599,5 @@
         });
 
 
-        // ———————————————————————————————————————————————
-        // (Optional) If you ever want the “remove” icon on Accident #0 to appear,
-        // uncomment these lines:
-        //
-        // const firstTrash = document.querySelector(
-        //   '.accident-entry:first-child .remove-accident'
-        // );
-        // if (firstTrash) {
-        //   firstTrash.style.display = 'inline-flex';
-        //   firstTrash.addEventListener('click', function() {
-        //     const entry = this.closest('.accident-entry');
-        //     if (entry) entry.remove();
-        //   });
-        // }
-        // ———————————————————————————————————————————————
-
     }); // end DOMContentLoaded
 </script>
