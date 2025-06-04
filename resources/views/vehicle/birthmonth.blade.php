@@ -40,8 +40,8 @@
     </div>
 
 
-    <div class="form--centeredBackBtn--uPc3O d-mobile-back mt-4">
-        <button type="button" class="BackButton--back--qwJFl BackButton--back--mobile">
+    <div class="form--centeredBackBtn--uPc3O d-mobile-back mt-4 ">
+        <button type="button" class=" header-back-abs BackButton--back--qwJFl BackButton--back--mobile ">
             <span class="arrow-wrapper">
                 <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
                     <g fill="none" fill-rule="evenodd">
@@ -54,7 +54,8 @@
         </button>
     </div>
 </div>
-
+<div style="height: 100px">
+</div>
 <style>
     @media (max-width: 1025px) {
         .d-desktop-header {

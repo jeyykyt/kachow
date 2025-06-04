@@ -69,12 +69,10 @@
                 </ul>
                 <input type="hidden" name="state" id="state" />
             </div>
-
-
         </div>
 
         <!-- City -->
-        <div class="custom-floating-label-input" style="padding-bottom: 25px">
+        <div class="custom-floating-label-input" style="margin-bottom: 18px">
             <input id="city" name="city" type="text" placeholder="e.g. Vancouver" required />
             <label for="city">City</label>
             <span class="custom-input-error"></span>
@@ -105,10 +103,21 @@
         </div>
     </div>
 
-
-
-
 </div>
+
+<section class="form--legalFooter--SaZVO">
+    <div class="form--helperText--V2kC4">
+        <img src="{{ asset('thumbnails/lady.png') }}">
+        <span style="font-weight: normal">
+            <div class="form--checkCircle--3Rxe3">
+                <svg viewBox="0 0 20 20" fill="none">
+                    <path d="M6 10.156L8.9 13 14 8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            Companies require this in order to provide an accurate quote
+        </span>
+    </div>
+</section>
 
 <style>
 

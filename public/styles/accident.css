@@ -1,0 +1,308 @@
+.accident-custom-grid, .ticket-custom-grid, .dui-custom-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: 365px;
+    width: 100%;
+    margin: 0 auto 48px auto;
+    box-sizing: border-box;
+}
+
+
+
+@media (max-width: 600px) {
+    .accident-custom-grid, .ticket-custom-grid, .dui-custom-grid {
+        gap: 18px;
+        padding: 0 2vw;
+    }
+}
+
+
+@media (max-width: 800px) and (min-width: 601px) {
+    .accident-custom-grid, .ticket-custom-grid, .dui-custom-grid{
+        grid-template-columns: 60% 40%;
+        padding: 0 10px;
+        gap: 24px 12px;
+    }
+}
+@media (max-width: 600px) {
+    .accident-custom-grid {
+        grid-template-columns: 1fr;
+        padding: 0 2vw;
+        gap: 18px 0;
+    }
+    /* Stack buttons on mobile, align right */
+    .accident-custom-grid > div:nth-child(3), /* Left button cell */
+    .accident-custom-grid> div:nth-child(4)  /* Right button cell */ {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .ticket-custom-grid {
+        grid-template-columns: 1fr;
+        padding: 0 2vw;
+        gap: 18px 0;
+    }
+    /* Stack buttons on mobile, align right */
+    .ticket-custom-grid > div:nth-child(3), /* Left button cell */
+    .ticket-custom-grid> div:nth-child(4)  /* Right button cell */ {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .dui-custom-grid {
+        grid-template-columns: 1fr;
+        padding: 0 2vw;
+        gap: 18px 0;
+    }
+    /* Stack buttons on mobile, align right */
+    .dui-custom-grid > div:nth-child(3), /* Left button cell */
+    .dui-custom-grid> div:nth-child(4)  /* Right button cell */ {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.custom-dropdown {
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    font-family: inherit;
+    user-select: none;
+}
+
+.custom-dropdown-selected {
+    border: 1px solid #CCCCCCFF;
+    border-radius: 2px;
+    background: #fff;
+    height: 64px;
+    padding: 0px 5px 0px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #124476;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border 0.2s;
+}
+
+.dropdown-custom-arrow {
+    font-size: 10px;
+    color: #858a8d;
+    transition: transform 0.22s cubic-bezier(.5,1,.5,1);
+}
+
+.custom-dropdown.open .custom-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.custom-dropdown-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: #fff;
+    border: 1px solid #124476;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 16px rgba(18, 68, 118, 0.12);
+    z-index: 99;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-height: 210px;
+    overflow-y: auto;
+}
+
+.custom-dropdown.open .custom-dropdown-options {
+    display: block;
+}
+
+.custom-dropdown-options li {
+    padding: 16px 24px;
+    font-size: 17px;
+    color: #124476;
+    cursor: pointer;
+    transition: background 0.18s;
+}
+
+.custom-dropdown-options li:hover{
+    background: #969d9f;
+    color: #124476;
+}
+.custom-dropdown-options li.active {
+    background: #124476;
+    color: white;
+}
+
+.selected-text {
+    flex: 1;
+    padding-top: 12px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .custom-dropdown { max-width: 100%; }
+    .custom-dropdown-selected { font-size: 16px; padding: 14px 38px 14px 14px; }
+    .custom-dropdown-options li { font-size: 15px; padding: 12px 16px; }
+}
+
+
+.custom-floating-label-input {
+    position: relative;
+    margin-top: 28px;
+}
+
+.custom-accident-dropdown-label, .custom-ticket-dropdown-label, .custom-dui-dropdown-label{
+    position: absolute;
+    left: 24px;
+    top: 26px;
+    font-size: 18px;
+    color: #7a9abb;
+    background: none;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Float label up if dropdown is open OR something is selected */
+.custom-dropdown.open .custom-accident-dropdown-label,
+.custom-dropdown.has-value .custom-accident-dropdown-label{
+    top: 16px;
+    left: 18px;
+    font-size: 13px;
+    color: #7a9abb;
+    background: transparent;
+    padding: 0 2px;
+}
+.custom-dropdown.open  .custom-ticket-dropdown-label,
+.custom-dropdown.has-value .custom-ticket-dropdown-label{
+    top: 16px;
+    left: 18px;
+    font-size: 13px;
+    color: #7a9abb;
+    background: transparent;
+    padding: 0 2px;
+}
+
+.custom-dropdown.open  .custom-dui-dropdown-label,
+.custom-dropdown.has-value .custom-dui-dropdown-label{
+    top: 16px;
+    left: 18px;
+    font-size: 13px;
+    color: #7a9abb;
+    background: transparent;
+    padding: 0 2px;
+}
+.form--addAnother--eOc\+z {
+    margin: 0 0 24px;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+
+/* Make sure each field takes 100% of its parent cell */
+ .ticket-entry, .form-custom-grid > .custom-floating-label-input,
+ .ticket-entry, .form-custom-grid > .custom-dropdown,
+ .ticket-entry, .form-custom-grid .custom-dropdown-selected {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.accident-entry, .form-custom-grid > .custom-floating-label-input,
+.accident-entry, .form-custom-grid > .custom-dropdown,
+.accident-entry, .form-custom-grid .custom-dropdown-selected {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.dui-entry, .form-custom-grid > .custom-floating-label-input,
+.dui-entry, .form-custom-grid > .custom-dropdown,
+.dui-entry, .form-custom-grid .custom-dropdown-selected {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+/* If you want the first trash icon (index 0) hidden, you can override it here: */
+.accident-entry:first-child .remove-accident,
+.ticket-entry:first-child .remove-ticket,
+.duit-entry:first-child .remove-dui{
+
+    display: none;
+}
+
+.addAccident {
+    color: #124476;
+    text-decoration: none;
+    margin-top: -20px;
+
+}
+
+.addAccident:hover{
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.remove-accident {
+    position: relative;
+    right: -400px;
+    top: -250px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-top: 8px;
+}
+
+.addTicket {
+    color: #124476;
+    text-decoration: none;
+
+}
+
+.addTicket:hover{
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.remove-ticket {
+    position: relative;
+    right: -400px;
+    top: -135px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    align-self: flex-end;
+}
+.addDui {
+    color: #124476;
+    text-decoration: none;
+    margin-top: -20px;
+
+}
+
+.addDui:hover{
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.remove-dui {
+    position: relative;
+    right: -400px;
+    top: -140px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+    .remove-ticket, .remove-accident, .remove-dui {
+        right: 160px;
+        top: 10px;
+
+    }
+}

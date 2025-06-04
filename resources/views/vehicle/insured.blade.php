@@ -4,7 +4,7 @@
 
     <!-- Wrap this in d-desktop-header -->
     <div class="header-row-center mb-4">
-        <button type="button" class=" d-desktop-header BackButton--back--qwJFl header-back-abs">
+        <button   onclick="window.history.back()" type="button" class=" d-desktop-header BackButton--back--qwJFl header-back-abs">
         <span class="arrow-wrapper">
             <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
                 <g fill="none" fill-rule="evenodd">
@@ -20,15 +20,39 @@
 
 
 
-    <div class="d-flex flex-wrap justify-content-center form--gridify--N3uth">
-        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">YES</div>
-        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">NO</div>
+    <form action="{{ route('quote.storeInsured') }}" method="POST">
+        @csrf
 
-    </div>
+        {{-- Hidden fields for context (if you need to show them back on “Back”) --}}
+        {{-- e.g. <input type="hidden" name="make_id" value="{{ $make->id }}"> etc. --}}
+
+        <div class="d-flex flex-wrap justify-content-center form--gridify--N3uth mb-4">
+            <button
+                type="submit"
+                name="currently_insured"
+                value="1"
+                class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU mb-3"
+                style="text-align: center;"
+            >
+                YES
+            </button>
+
+            <button
+                type="submit"
+                name="currently_insured"
+                value="0"
+                class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU mb-3"
+                style="text-align: center;"
+            >
+                NO
+            </button>
+        </div>
+    </form>
 
 
     <div class="form--centeredBackBtn--uPc3O d-mobile-back mt-4">
-        <button type="button" class="BackButton--back--qwJFl BackButton--back--mobile">
+        <button         onclick="window.history.back()"
+                      type="button" class="BackButton--back--qwJFl BackButton--back--mobile">
             <span class="arrow-wrapper">
                 <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
                     <g fill="none" fill-rule="evenodd">
@@ -41,7 +65,8 @@
         </button>
     </div>
 </div>
-
+<div style="height: 50px">
+</div>
 <style>
     @media (max-width: 1025px) {
         .d-desktop-header {

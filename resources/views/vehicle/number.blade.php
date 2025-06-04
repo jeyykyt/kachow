@@ -33,23 +33,80 @@
 
         <!-- Button with Badge -->
         <div class="custom-btn-wrapper">
+            <a  href="{{ route('quote1') }}"
+                style="text-decoration: none; color: inherit">
             <button type="button" class="custom-cta-btn">
                 <span class="custom-btn-text">Get My Quote</span>
                 <span class="custom-badge">1</span>
             </button>
+            </a>
         </div>
 
         <!-- Both buttons on one row -->
 
     </div>
 
+</div>
+<section class="form--legalFooter--SaZVO">
+    <div class="form--helperText--V2kC4" style="margin-top: -30px">
+        <img src="{{ asset('thumbnails/lady.png') }}">
+        <span style="font-weight: normal">
+            <div class="form--checkCircle--3Rxe3">
+                <svg viewBox="0 0 20 20" fill="none">
+                    <path d="M6 10.156L8.9 13 14 8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            Your car insurance quotes are ready
+        </span>
+    </div>
 
 
+</section>
+<div class="form--disclaimer--2UXbf">
+    <div class="smsConsentDisplay--consentWrapper--T5+ik">
+        <label>
+            <input type="hidden" id="leadid_tcpa_disclosure">
+            <p>
+                By clicking 'Get My Quote' and submitting this form, I provide an electronic signature and express written consent to the SMS terms below and to receive marketing communications for insurance products & services via automatic telephone dialing system, including calls, SMS/MMS, pre-recorded calls or artificial voice messages from coverageprofessor.com and its
+                <a href="/disclaimer#marketingPartners" target="_blank">marketing partners</a>.
+                Message and data rates may apply. I understand I may opt-out of phone and SMS communication by replying 'STOP' or 'HELP' for more info, or by contacting contact@coverageprofessor.com.
+                I understand I will receive marketing communications to the phone number provided, which includes wireless numbers, and if applicable, numbers previously registered on the Federal and State DNC registries.
+                See <a href="/sms" target="_blank">SMS Policy</a> for more details. I certify that I am a US resident over 18, and all information submitted with this request is true and accurate to the best of my knowledge.
+                Consent is not a condition to receive services or purchase products from coverageprofessor.com and if I do not consent, I can call (877) 512-3977 to speak to a professional to obtain an insurance quote.
+                I acknowledge my consent can be revoked at any time. I understand and agree to the
+                <a href="/terms" target="_blank">Terms and Conditions</a> including mandatory arbitration.
+            </p>
+        </label>
+    </div>
 
-
+    <div class="mainConsentDisplay--consentWrapper--T5-vi">
+        <label>
+            <p>
+                By clicking Get My Quote, you consent to CoverageProfessor saving the information you entered and sharing it with insurance carriers so you can get the most up-to-date quotes, no matter what device you're using.
+                You also agree to CoverageProfessor's
+                <a href="/privacy" target="_blank">Privacy Policy</a> and
+                <a href="/terms" target="_blank">Terms of Service.</a>
+            </p>
+        </label>
+    </div>
 </div>
 
 <style>
+
+    .form--disclaimer--2UXbf {
+        justify-content: center;
+        width: 650px;
+        font-size: 13px;
+        color: #666666;
+        margin: 0 auto;          /* Center horizontally */
+        text-align: left;
+    }
+
+    .form--disclaimer--2UXbf a {
+        color: #007bff; /* Keeps the link color default (or use a different color if needed) */
+        text-decoration: underline;
+    }
+
     .custom-btn-wrapper {
         display: flex;
         justify-content: center;
@@ -132,16 +189,25 @@
             padding-left: 75px;
         }
     }
+
     @media (max-width: 800px) and (min-width: 601px) {
-        .form-align-grid {
+    .form-align-grid {
             grid-template-columns: 60% 40%;
             padding: 0 10px;
-        }
+        },
+
+   .form--disclaimer--2UXbf {
+        width: 300px;
+    }
     }
     @media (max-width: 600px) {
         .form-align-grid {
             grid-template-columns: 50% 50%;
             padding: 0 2vw;
+        },
+
+        .form--disclaimer--2UXbf {
+            width: 250px;
         }
     }
     }

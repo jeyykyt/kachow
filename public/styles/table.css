@@ -225,6 +225,168 @@ border-color: hsl(0, 0%, 80%);
     justify-content: center;
 }
 
+/*dropdown*/
+/*ZIP CODE AND STATE*/
+/* Shared for text and select floating label fields */
+/* ──────────────────────────────────────────── *
+ *            Base styles for dropdown         *
+ * ──────────────────────────────────────────── */
+
+.make-dropdown {
+    position: relative;
+    width: 100%;
+    font-family: inherit;
+    user-select: none;
+    box-shadow: inset 0 0 0 1px var(--color5, #dcdcdc), 0 1px 2px 0 rgba(var(--color2-rgb, 0, 0, 0), .1);
+    border-radius: 10px;
+}
+
+.make-dropdown label.make-dropdown-label {
+    position: absolute;
+    left: 24px;
+    top: 20px;
+    font-size: 18px;
+    color: #7a9abb;
+    background: transparent;
+    padding: 0 4px;
+    pointer-events: none;
+    z-index: 2;
+    transition: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* FLOAT the label up if dropdown OPEN or has-value */
+.make-dropdown.open .make-dropdown-label,
+.make-dropdown.has-value .make-dropdown-label {
+    top: 10px;
+    left: 18px;
+    font-size: 13px;
+    color: #7a9abb;
+    background: white;
+    padding: 0 2px;
+}
+
+/* The “selected” visible box */
+.make-dropdown-selected {
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+    background: #fff;
+    height: 64px;
+    padding: 0 20px 0 20px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #124476;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border 0.2s;
+}
+
+/* When open, highlight the border */
+.make-dropdown.open .make-dropdown-selected {
+    border-color: #124476;
+}
+
+/* The arrow inside the selected box */
+.make-dropdown-arrow {
+    transition: transform 0.2s;
+}
+.make-dropdown.open .make-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* The UL of options */
+.make-dropdown-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #124476;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 16px rgba(18, 68, 118, 0.12);
+    z-index: 99;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+/* Show options when “open” */
+.make-dropdown.open .make-dropdown-options {
+    display: block;
+}
+
+/* Each LI in the dropdown */
+.make-dropdown-options li {
+    display: flex;            /* put icon + text next to each other */
+    align-items: center;      /* vertically center them inside the 64px‐tall box */
+    padding: 12px 24px;       /* adjust padding if your <li> height needs tweaking */
+    font-size: 18px;
+    color: #124476;
+    cursor: pointer;
+    transition: background 0.18s;
+    list-style: none;         /* remove bullets */
+}
+
+/* On hover or when “active,” adjust background/text colors */
+.make-dropdown-options li:hover {
+    background: #f2f6fb;
+}
+.make-dropdown-options li.active {
+    background: #124476;
+    color: #fff;
+}
+
+/* 2) Style the <img> so that it’s a consistent size and spacing */
+.make-dropdown-options li .make-icon {
+    width: 24px;    /* adjust as needed */
+    height: 24px;   /* adjust as needed */
+    object-fit: contain;
+    margin-right: 12px;  /* space between icon and text */
+}
+
+/* 3) (Optional) If you want the <span> text to never wrap */
+.make-dropdown-options li .make-option-text {
+    white-space: nowrap;
+}
+
+/* Optional: If you want the entire container to be a bit narrower/wider */
+.make-custom-dropdown {
+    margin: 0 auto;
+}
+
+/* For input’s “filled” state (if you ever use a <select> instead) */
+.make-select-floating select.filled + label {
+    top: 10px;
+    left: 18px;
+    font-size: 13px;
+    color: #124476;
+}
+
+/* 1) Force the selected text to sit at the bottom of its 64px box */
+.make-dropdown-selected .make-selected-text {
+    align-self: flex-end;    /* push the text toward the bottom */
+     /*If it’s still too high/low, tweak padding: */
+     padding-top: 6px;
+     padding-bottom: 6px;
+}
+
+/* 2) Keep the arrow icon vertically centered */
+.make-dropdown-selected .make-dropdown-arrow {
+    align-self: center;
+}
+
+/* Optional alternative: purely adjust padding instead of flex-end */
+
+/*.make-dropdown-selected .make-selected-text {*/
+/*  padding-top: 12px;*/
+/*}*/
+
+
+
 @media (max-width: 1025px) {
     .d-desktop-header {
         display: none !important;

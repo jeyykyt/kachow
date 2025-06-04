@@ -4,7 +4,7 @@
 
     <!-- Wrap this in d-desktop-header -->
     <div class="header-row-center mb-4">
-        <button type="button" class=" d-desktop-header BackButton--back--qwJFl header-back-abs">
+        <button onclick="window.history.back()" type="button" class=" d-desktop-header BackButton--back--qwJFl header-back-abs">
         <span class="arrow-wrapper">
             <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
                 <g fill="none" fill-rule="evenodd">
@@ -25,20 +25,14 @@
 
 
     <div class="d-flex flex-wrap justify-content-center form--gridify--N3uth">
-        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">MALE</div>
-        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">FEMALE</div>
-
-
-
-
-
-
-
+        <div role="button" id="gender-male" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">MALE</div>
+        <div role="button" id="gender-female" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">FEMALE</div>
     </div>
 
 
+
     <div class="form--centeredBackBtn--uPc3O d-mobile-back mt-4">
-        <button type="button" class="BackButton--back--qwJFl BackButton--back--mobile">
+        <button onclick="window.history.back()" type="button" class="BackButton--back--qwJFl BackButton--back--mobile">
             <span class="arrow-wrapper">
                 <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
                     <g fill="none" fill-rule="evenodd">
@@ -51,7 +45,8 @@
         </button>
     </div>
 </div>
-
+<div style="height: 100px">
+</div>
 <style>
     @media (max-width: 1025px) {
         .d-desktop-header {

@@ -21,21 +21,14 @@
 
 
     <div class="d-flex flex-wrap justify-content-center form--gridify--N3uth">
-        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">OWN</div>
-        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">RENT</div>
-        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU">OTHER</div>
-
-
-
-
-
-
-
+        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU own">OWN</div>
+        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU next">RENT</div>
+        <div role="button" class="col-10 col-md-6 form--optionPill--aoYkm form--centered--StlQU next">OTHER</div>
     </div>
 
 
     <div class="form--centeredBackBtn--uPc3O d-mobile-back mt-4">
-        <button type="button" class="BackButton--back--qwJFl BackButton--back--mobile">
+        <button type="button" class="BackButton--back--qwJFl BackButton--back--mobile header-back-abs">
             <span class="arrow-wrapper">
                 <svg width="24" height="24" viewBox="0 0 24 24" style="transform: rotate(180deg);">
                     <g fill="none" fill-rule="evenodd">
@@ -48,7 +41,7 @@
         </button>
     </div>
 </div>
-
+<div style="height: 100px"></div>
 <style>
     @media (max-width: 1025px) {
         .d-desktop-header {

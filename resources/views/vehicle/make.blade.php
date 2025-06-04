@@ -1,96 +1,114 @@
 <div class="container">
+    <h5
+        class="mb-0 center-title vehicle-title"
+        style="color: #46c2e8; font-size: 14px; font-weight: bold; display: none;"
+    >
+        1ST VEHICLE
+    </h5>
     <h1 class="text-center mb-4" style="color: #124476;">Vehicle Make</h1>
     <div class="makes-container">
         <div class="row">
-            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
-                <div class="make-card">
-                    <img src="{{ asset('cars/buick.svg') }}" alt="Buick Logo" loading="lazy" class="img-fluid mb-2">
-                    <h5 class="make-name">Buick</h5>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
-                <div class="make-card">
-                    <img src="{{ asset('cars/buick.svg') }}" alt="Buick Logo" loading="lazy" class="img-fluid mb-2">
-                    <h5 class="make-name">Buick</h5>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
-                <div class="make-card">
-                    <img src="{{ asset('cars/buick.svg') }}" alt="Buick Logo" loading="lazy" class="img-fluid mb-2">
-                    <h5 class="make-name">Buick</h5>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
-                <div class="make-card">
-                    <img src="{{ asset('cars/buick.svg') }}" alt="Buick Logo" loading="lazy" class="img-fluid mb-2">
-                    <h5 class="make-name">Buick</h5>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
-                <div class="make-card">
-                    <img src="{{ asset('cars/buick.svg') }}" alt="Buick Logo" loading="lazy" class="img-fluid mb-2">
-                    <h5 class="make-name">Buick</h5>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
-                <div class="make-card">
-                    <img src="{{ asset('cars/buick.svg') }}" alt="Buick Logo" loading="lazy" class="img-fluid mb-2">
-                    <h5 class="make-name">Buick</h5>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
-                <div class="make-card">
-                    <img src="{{ asset('cars/buick.svg') }}" alt="Buick Logo" loading="lazy" class="img-fluid mb-2">
-                    <h5 class="make-name">Buick</h5>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
-                <div class="make-card">
-                    <img src="{{ asset('cars/buick.svg') }}" alt="Buick Logo" loading="lazy" class="img-fluid mb-2">
-                    <h5 class="make-name">Buick</h5>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
-                <div class="make-card">
-                    <img src="{{ asset('cars/buick.svg') }}" alt="Buick Logo" loading="lazy" class="img-fluid mb-2">
-                    <h5 class="make-name">Buick</h5>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
-                <div class="make-card">
-                    <img src="{{ asset('cars/buick.svg') }}" alt="Buick Logo" loading="lazy" class="img-fluid mb-2">
-                    <h5 class="make-name">Buick</h5>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
-                <div class="make-card">
-                    <img src="{{ asset('cars/buick.svg') }}" alt="Buick Logo" loading="lazy" class="img-fluid mb-2">
-                    <h5 class="make-name">Buick</h5>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
-                <div class="make-card">
-                    <img src="{{ asset('cars/buick.svg') }}" alt="Buick Logo" loading="lazy" class="img-fluid mb-2">
-                    <h5 class="make-name">Buick</h5>
-                </div>
-            </div>
+            @foreach($featured as $make)
+                @php
+                    $src = asset('storage/' . $make->image_path);
+                    $displayName = \Illuminate\Support\Str::title(strtolower($make->name));
+                @endphp
 
-            <!-- Repeat this structure for each make-card -->
-
-            <div class="col-12 px-3">
-                <div class="dropdown-card">
-                    <select name="vehicles[0][make]" class="dropdown-select">
-                        <option class="dropdown-select" value="" hidden selected>Select Make</option>
-                        <option value="other">Other Make</option>
-                        <option value='{"id":29,"name":"ACURA"}'>ACURA</option>
-                        <option value='{"id":30,"name":"ALFA ROMEO"}'>ALFA ROMEO</option>
-                        <option class="dropdown-select" value='{"id":31,"name":"ASTON MARTIN"}'>ASTON MARTIN</option>
-                        <option class="dropdown-select" value='{"id":32,"name":"AUDI"}'>AUDI</option>
-                        <option value='{"id":33,"name":"BMW"}'>BMW</option>
-                        <!-- More options here... -->
-                    </select>
+                <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
+                    <a
+                        href="{{ route('make.years', $make->id) }}"
+                        style="text-decoration: none; color: inherit;"
+                    >
+                        <div
+                            class="make-card text-center
+                   {{ $make->id == ($selectedMakeId ?? '') ? 'highlighted' : '' }}"
+                        >
+                            <img
+                                src="{{ $src }}"
+                                alt="{{ $displayName }} Logo"
+                                loading="lazy"
+                                class="img-fluid mb-2"
+                            >
+                            <h5 class="make-name">{{ $displayName }}</h5>
+                        </div>
+                    </a>
                 </div>
-            </div>
+            @endforeach
         </div>
-    </div>
+
+        {{-- 2) Dropdown of all other makes --}}
+        <div class="make-dropdown make-custom-dropdown" tabindex="0">
+            <label class="make-dropdown-label" for="make">Other Make</label>
+
+            <div class="make-dropdown-selected">
+      <span class="make-selected-text">
+        @if(! empty($selectedMakeId))
+              @php
+                  $sel = $others->firstWhere('id', $selectedMakeId);
+                  $initialText = $sel
+                    ? ($sel->name)
+                    : 'Select Make';
+              @endphp
+              {{ $initialText }}
+          @else
+              Select Make
+          @endif
+      </span>
+                <span class="make-dropdown-arrow">
+        <svg width="32" height="32" viewBox="0 0 24 24">
+          <polyline
+              points="8 10 12 14 16 10"
+              stroke="#858A8DFF"
+              stroke-width="1.5"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+            </div>
+
+            <ul class="make-dropdown-options">
+                @foreach($others as $make)
+                    @php
+                        $src = asset('storage/' . $make->image_path);
+                        $displayName = \Illuminate\Support\Str::title(strtolower($make->name));
+                    @endphp
+
+                    <li
+                        onclick="window.location='{{ route('make.years', $make->id) }}';"
+                        class="d-flex align-items-center make-option
+                 {{ $make->id == ($selectedMakeId ?? '') ? 'chosen' : '' }}"
+                        style="cursor:pointer;"
+                    >
+                        <img
+                            src="{{ $src }}"
+                            class="make-icon"
+                            alt="{{ $displayName }} logo"
+                            style="width:24px; height:24px; margin-right:8px;"
+                        >
+                        <span class="make-option-text">{{ $displayName }}</span>
+                    </li>
+                @endforeach
+            </ul>
+
+            <input type="hidden" name="make" id="make" />
+                </div>
+
+            </div>
 </div>
+
+{{--LADY FOOTERR--}}
+<section class="form--legalFooter--SaZVO">
+    <div class="form--helperText--V2kC4">
+        <img src="{{ asset('thumbnails/lady.png') }}">
+        <span style="font-weight: normal">
+            <div class="form--checkCircle--3Rxe3">
+                <svg viewBox="0 0 20 20" fill="none">
+                    <path d="M6 10.156L8.9 13 14 8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            Tell us what car you drive and we’ll look for the best rates
+        </span>
+    </div>
+</section>

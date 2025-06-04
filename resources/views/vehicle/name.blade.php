@@ -25,6 +25,7 @@
 
     <div class="form-custom-grid">
         <!-- Legal First Name -->
+
         <div class="Input--textInput--34of2 Input--small--315NH floating-label-input">
             <input id="firstName" name="drivers.0.firstName" type="text" placeholder="e.g. John" required />
             <label for="firstName">Legal First Name</label>
@@ -93,7 +94,19 @@
 
 
 </div>
-
+<section class="form--legalFooter--SaZVO">
+    <div class="form--helperText--V2kC4" style="margin-top: -30px">
+        <img src="{{ asset('thumbnails/lady.png') }}">
+        <span style="font-weight: normal">
+            <div class="form--checkCircle--3Rxe3">
+                <svg viewBox="0 0 20 20" fill="none">
+                    <path d="M6 10.156L8.9 13 14 8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            Your information is safe and secure
+        </span>
+    </div>
+</section>
 <style>
     @media (max-width: 1025px) {
         .d-desktop-header {

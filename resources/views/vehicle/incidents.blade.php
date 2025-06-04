@@ -23,13 +23,13 @@
     </div>
 
 
-    <div class="form-align-grid">
+    <div class="form-align-grid" id="step-incidents">
         <!-- Incident row: label and options in grid columns -->
         <!-- Had an accident -->
         <div class="incident-label">Had an accident</div>
         <div class="incident-options">
             <label class="incident-option">
-                <input type="radio" name="accident" checked>
+                <input type="radio" name="accident" value="yes" >
                 <span class="checkmark">
             <svg class="check-svg" width="56" height="36" viewBox="0 0 24 24">
                 <g fill="none" fill-rule="evenodd">
@@ -40,7 +40,7 @@
                 <span class="option-label">Yes</span>
             </label>
             <label class="incident-option">
-                <input type="radio" name="accident">
+                <input type="radio" name="accident" value="no" checked>
                 <span class="checkmark">
             <svg class="check-svg" width="56" height="36" viewBox="0 0 24 24">
                 <g fill="none" fill-rule="evenodd">
@@ -56,7 +56,7 @@
         <div class="incident-label">Received a ticket</div>
         <div class="incident-options">
             <label class="incident-option">
-                <input type="radio" name="ticket" checked>
+                <input type="radio" name="ticket" value="yes">
                 <span class="checkmark">
             <svg class="check-svg" width="56" height="36" viewBox="0 0 24 24">
                 <g fill="none" fill-rule="evenodd">
@@ -67,7 +67,7 @@
                 <span class="option-label">Yes</span>
             </label>
             <label class="incident-option">
-                <input type="radio" name="ticket">
+                <input type="radio" name="ticket" value="no" checked>
                 <span class="checkmark">
             <svg class="check-svg" width="56" height="36" viewBox="0 0 24 24">
                 <g fill="none" fill-rule="evenodd">
@@ -83,7 +83,7 @@
         <div class="incident-label">Received a DUI</div>
         <div class="incident-options">
             <label class="incident-option">
-                <input type="radio" name="dui" checked>
+                <input type="radio" name="dui" value="yes">
                 <span class="checkmark">
             <svg class="check-svg" width="56" height="36" viewBox="0 0 24 24">
                 <g fill="none" fill-rule="evenodd">
@@ -94,7 +94,7 @@
                 <span class="option-label">Yes</span>
             </label>
             <label class="incident-option">
-                <input type="radio" name="dui">
+                <input type="radio" name="dui" value="no" checked>
                 <span class="checkmark">
             <svg class="check-svg" width="56" height="36" viewBox="0 0 24 24">
                 <g fill="none" fill-rule="evenodd">
@@ -139,7 +139,8 @@
 
 
 </div>
-
+<div style="height: 100px">
+</div>
 <style>
     @media (max-width: 1025px) {
         .d-desktop-header {
