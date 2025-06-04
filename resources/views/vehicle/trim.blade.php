@@ -4,7 +4,10 @@
     <!-- Wrap this in d-desktop-header -->
     <div class="header-row-center mb-4" style="display: flex; align-items: center; justify-content: center;">
         <!-- Back button (unchanged) -->
-        <a href="{{ route('make.index', ['selected' => $make->id]) }}"
+        <a  href="{{ route('make.models', [
+        'make' => $make->id,
+        'year' => $selectedYear,
+      ]) }}"
            style="text-decoration: none; color: inherit; margin-right: 1rem;">
             <button type="button" class="d-desktop-header BackButton--back--qwJFl header-back-abs">
       <span class="arrow-wrapper">

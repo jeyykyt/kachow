@@ -236,64 +236,10 @@
 
 </main>
 <script>
-    //PROGRESS BAR
+
+ //ADD VEHICLE LABEL
+
     document.addEventListener('DOMContentLoaded', function() {
-        // Map “step → percent”
-        const stepToPercent = {
-            make: 25,
-            year: 37,
-            model: 48,
-            trim: 57,
-            own: 59,
-            addVehicle: 68,
-            insured: 79,
-            ownHouse: 81,
-            gender: 87,
-            birthmonth: 88,
-            birthday: 90,
-            birthyear: 91,
-            married: 93,
-            incident: 94,
-            name: 96,
-            addDriver: 96,
-            address: 97,
-            ownership: 97,
-            email: 98,
-            number: 99
-        };
-
-        // 1) Determine current step’s percent
-        const curStep = window.currentStep || '';
-        const currentPercent = stepToPercent[curStep] || 0;
-
-        // 2) Read “maxProgress” from localStorage (default 0)
-        let maxProgress = parseInt(localStorage.getItem('maxProgress') || '0', 10);
-        if (isNaN(maxProgress)) {
-            maxProgress = 0;
-        }
-
-        // 3) If we advanced, update localStorage
-        if (currentPercent > maxProgress) {
-            maxProgress = currentPercent;
-            localStorage.setItem('maxProgress', maxProgress.toString());
-        }
-
-        // 4) Render the bar at maxProgress%
-        const fillElem  = document.querySelector('.progress-bar-fill');
-        const labelElem = document.querySelector('.progress-bar-label');
-        if (fillElem && labelElem) {
-            fillElem.style.width = maxProgress + '%';
-            labelElem.style.right = maxProgress + '%';
-            labelElem.textContent = maxProgress + '%';
-        }
-
-    });
-
-
-
-//ADD VEHICLE LABEL
-
-document.addEventListener('DOMContentLoaded', function() {
     // ──────────────────────────────────────────────────────────────────────────
     // UTILITY: return ordinal suffix for an integer (1→“ST”, 2→“ND”, 3→“RD”, else “TH”)
     // ──────────────────────────────────────────────────────────────────────────
@@ -359,508 +305,1138 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-    // //script for routing ONLY
-    document.addEventListener('DOMContentLoaded', function() {
-    // ──────────────────────────────────────────────────────────────────────────
-    // Cache all step containers by ID:
-    // ──────────────────────────────────────────────────────────────────────────
-    const stepGender            = document.getElementById('step-gender');
-    const stepBirthMonth        = document.getElementById('step-birthMonth');
-    const stepBirthYear         = document.getElementById('step-birthYear');
-    const stepMarried           = document.getElementById('step-married');
-    const stepIncidents         = document.getElementById('step-incidents');
-    const stepDetailAccident    = document.getElementById('step-detailAccident');
-    const stepDetailTicket      = document.getElementById('step-detailTicket');
-    const stepDetailDui         = document.getElementById('step-detailDui');
-    const stepNameDriver        = document.getElementById('step-name');      // “Driver Name” step
-    const stepRelName           = document.getElementById('step-relName');   // “Relation/Driver Name” step
-    const stepAddDriver         = document.getElementById('step-addDriver');
-    const stepAddress           = document.getElementById('step-address');
-    const stepOwnership         = document.getElementById('step-ownership');
-    const stepBundle            = document.getElementById('step-bundle');
-    const stepEmail             = document.getElementById('step-email');
-    const stepNumber            = document.getElementById('step-number');
+ //script for routing ONLY
 
-    // ──────────────────────────────────────────────────────────────────────────
-    // Track how many drivers have been added:
-    // ──────────────────────────────────────────────────────────────────────────
-    let driverCount = 1;
+ document.addEventListener('DOMContentLoaded', function() {
+     // ──────────────────────────────────────────────────────────────────────────
+     // Cache all step containers by ID:
+     // ──────────────────────────────────────────────────────────────────────────
+     const stepGender            = document.getElementById('step-gender');
+     const stepBirthMonth        = document.getElementById('step-birthMonth');
+     const stepBirthYear         = document.getElementById('step-birthYear');
+     const stepMarried           = document.getElementById('step-married');
+     const stepIncidents         = document.getElementById('step-incidents');
+     const stepDetailAccident    = document.getElementById('step-detailAccident');
+     const stepDetailTicket      = document.getElementById('step-detailTicket');
+     const stepDetailDui         = document.getElementById('step-detailDui');
+     const stepNameDriver        = document.getElementById('step-name');      // “Driver Name” step
+     const stepRelName           = document.getElementById('step-relName');   // “Relation/Driver Name” step
+     const stepAddDriver         = document.getElementById('step-addDriver');
+     const stepAddress           = document.getElementById('step-address');
+     const stepOwnership         = document.getElementById('step-ownership');
+     const stepBundle            = document.getElementById('step-bundle');
+     const stepEmail             = document.getElementById('step-email');
+     const stepNumber            = document.getElementById('step-number');
 
-    // Track ownership choice to decide back‐button behavior in email:
-    let ownershipChoice = null;
+     // ──────────────────────────────────────────────────────────────────────────
+     // Track how many drivers have been added:
+     // ──────────────────────────────────────────────────────────────────────────
+     let driverCount = 1;
 
-    // Returns ordinal suffix for a number (1→“ST”, 2→“ND”, 3→“RD”, otherwise “TH”)
-    function getOrdinalSuffix(n) {
-    const rem100 = n % 100;
-    if (rem100 >= 11 && rem100 <= 13) return 'TH';
-    const rem10 = n % 10;
-    if (rem10 === 1) return 'ST';
-    if (rem10 === 2) return 'ND';
-    if (rem10 === 3) return 'RD';
-    return 'TH';
-}
+     // Track ownership choice to decide back‐button behavior in email:
+     let ownershipChoice = null;
 
-    // Updates every <h5 class="center-title"> in driver‐related steps to “NTH DRIVER”
-    function updateDriverHeaders(count) {
-    const suffix = getOrdinalSuffix(count);
-    const text   = `${count}${suffix} DRIVER`;
-    [
-    stepGender,
-    stepBirthMonth,
-    stepBirthYear,
-    stepMarried,
-    stepIncidents,
-    stepDetailAccident,
-    stepDetailTicket,
-    stepDetailDui,
-    stepNameDriver,
-    stepRelName
-    ].forEach(function(step) {
-    if (!step) return;
-    const h5 = step.querySelector('h5.center-title');
-    if (h5) h5.textContent = text;
-});
-}
+     // Returns ordinal suffix for a number (1→“ST”, 2→“ND”, 3→“RD”, otherwise “TH”)
+     function getOrdinalSuffix(n) {
+         const rem100 = n % 100;
+         if (rem100 >= 11 && rem100 <= 13) return 'TH';
+         const rem10 = n % 10;
+         if (rem10 === 1) return 'ST';
+         if (rem10 === 2) return 'ND';
+         if (rem10 === 3) return 'RD';
+         return 'TH';
+     }
 
-    // ──────────────────────────────────────────────────────────────────────────
-    // 1) Vehicle Name ↔ AddDriver ↔ Address ↔ Ownership ↔ Bundle ↔ Email ↔ Number flow
-    // ──────────────────────────────────────────────────────────────────────────
+     // Updates every <h5 class="center-title"> in driver‐related steps to “NTH DRIVER”
+     function updateDriverHeaders(count) {
+         const suffix = getOrdinalSuffix(count);
+         const text   = `${count}${suffix} DRIVER`;
+         [
+             stepGender,
+             stepBirthMonth,
+             stepBirthYear,
+             stepMarried,
+             stepIncidents,
+             stepDetailAccident,
+             stepDetailTicket,
+             stepDetailDui,
+             stepNameDriver,
+             stepRelName
+         ].forEach(function(step) {
+             if (!step) return;
+             const h5 = step.querySelector('h5.center-title');
+             if (h5) h5.textContent = text;
+         });
+     }
 
-    // “Vehicle Name” → “AddDriver”
-    if (stepNameDriver) {
-    // Next → AddDriver
-    const nextFromName = stepNameDriver.querySelector('.right-btn');
-    if (nextFromName) {
-    nextFromName.addEventListener('click', function() {
-    stepNameDriver.style.display = 'none';
-    stepAddDriver.style.display  = 'block';
-});
-}
+     // ──────────────────────────────────────────────────────────────────────────
+     // 1) Vehicle Name ↔ AddDriver ↔ Address ↔ Ownership ↔ Bundle ↔ Email ↔ Number flow
+     // ──────────────────────────────────────────────────────────────────────────
 
-    // Back → Incidents (only if returning from driver‐details)
-    stepNameDriver.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepNameDriver.style.display = 'none';
-    stepIncidents.style.display  = 'block';
-});
-});
-}
+     // “Vehicle Name” → “AddDriver”
+     if (stepNameDriver) {
+         // Next → AddDriver
+         const nextFromName = stepNameDriver.querySelector('.right-btn');
+         if (nextFromName) {
+             nextFromName.addEventListener('click', function() {
+                 stepNameDriver.style.display = 'none';
+                 stepAddDriver.style.display  = 'block';
+             });
+         }
 
-    // “AddDriver”: Yes or No
-    if (stepAddDriver) {
-    // Back → Vehicle Name
-    stepAddDriver.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepAddDriver.style.display    = 'none';
-    stepNameDriver.style.display   = 'block';
-});
-});
+         // Back → Incidents (only if returning from driver‐details)
+         stepNameDriver.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepNameDriver.style.display = 'none';
+                 stepIncidents.style.display  = 'block';
+             });
+         });
+     }
 
-    // “Yes” → increment driverCount, update headers, go to Gender
-    const btnYes = stepAddDriver.querySelector('.addDriverYes');
-    if (btnYes) {
-    btnYes.addEventListener('click', function() {
-    driverCount += 1;
-    updateDriverHeaders(driverCount);
-    stepAddDriver.style.display = 'none';
-    stepGender.style.display    = 'block';
-});
-}
+     // “AddDriver”: Yes or No
+     if (stepAddDriver) {
+         // Back → Vehicle Name
+         stepAddDriver.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepAddDriver.style.display    = 'none';
+                 stepNameDriver.style.display   = 'block';
+             });
+         });
 
-    // “No” → skip driver flow, go to Address
-    const btnNo = stepAddDriver.querySelector('.addDriverNo');
-    if (btnNo) {
-    btnNo.addEventListener('click', function() {
-    stepAddDriver.style.display = 'none';
-    stepAddress.style.display   = 'block';
-});
-}
-}
+         // “Yes” → increment driverCount, update headers, go to Gender
+         const btnYes = stepAddDriver.querySelector('.addDriverYes');
+         if (btnYes) {
+             btnYes.addEventListener('click', function() {
+                 driverCount += 1;
+                 updateDriverHeaders(driverCount);
+                 stepAddDriver.style.display = 'none';
+                 stepGender.style.display    = 'block';
+             });
+         }
 
-    // “Address”
-    if (stepAddress) {
-    // Back → AddDriver
-    stepAddress.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepAddress.style.display   = 'none';
-    stepAddDriver.style.display = 'block';
-});
-});
+         // “No” → skip driver flow, go to Address
+         const btnNo = stepAddDriver.querySelector('.addDriverNo');
+         if (btnNo) {
+             btnNo.addEventListener('click', function() {
+                 stepAddDriver.style.display = 'none';
+                 stepAddress.style.display   = 'block';
+             });
+         }
+     }
 
-    // Next → Ownership
-    const nextFromAddress = stepAddress.querySelector('.right-btn');
-    if (nextFromAddress) {
-    nextFromAddress.addEventListener('click', function() {
-    stepAddress.style.display   = 'none';
-    stepOwnership.style.display = 'block';
-});
-}
-}
+     // “Address”
+     if (stepAddress) {
+         // Back → AddDriver
+         stepAddress.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepAddress.style.display   = 'none';
+                 stepAddDriver.style.display = 'block';
+             });
+         });
 
-    // “Ownership”
-    if (stepOwnership) {
-    // Back → Address
-    stepOwnership.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepOwnership.style.display = 'none';
-    stepAddress.style.display   = 'block';
-});
-});
+         // Next → Ownership
+         const nextFromAddress = stepAddress.querySelector('.right-btn');
+         if (nextFromAddress) {
+             nextFromAddress.addEventListener('click', function() {
+                 stepAddress.style.display   = 'none';
+                 stepOwnership.style.display = 'block';
+             });
+         }
+     }
 
-    // “OWN” → go to Bundle
-    const btnOwn = stepOwnership.querySelector('.own');
-    if (btnOwn) {
-    btnOwn.addEventListener('click', function() {
-    ownershipChoice = 'own';
-    stepOwnership.style.display = 'none';
-    stepBundle.style.display    = 'block';
-});
-}
+     // “Ownership”
+     if (stepOwnership) {
+         // Back → Address
+         stepOwnership.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepOwnership.style.display = 'none';
+                 stepAddress.style.display   = 'block';
+             });
+         });
 
-    // “RENT” and “OTHER” (class “next”) → go to Email
-    stepOwnership.querySelectorAll('.next').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    ownershipChoice = 'skip';
-    stepOwnership.style.display = 'none';
-    stepEmail.style.display     = 'block';
-});
-});
-}
+         // “OWN” → go to Bundle
+         const btnOwn = stepOwnership.querySelector('.own');
+         if (btnOwn) {
+             btnOwn.addEventListener('click', function() {
+                 ownershipChoice = 'own';
+                 stepOwnership.style.display = 'none';
+                 stepBundle.style.display    = 'block';
+             });
+         }
 
-    // “Bundle”
-    if (stepBundle) {
-    // Back → Ownership
-    stepBundle.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepBundle.style.display    = 'none';
-    stepOwnership.style.display = 'block';
-});
-});
+         // “RENT” and “OTHER” (class “next”) → go to Email
+         stepOwnership.querySelectorAll('.next').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 ownershipChoice = 'skip';
+                 stepOwnership.style.display = 'none';
+                 stepEmail.style.display     = 'block';
+             });
+         });
+     }
 
-    // Any “next” in Bundle → go to Email
-    stepBundle.querySelectorAll('.next').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    // ownershipChoice stays 'own'
-    stepBundle.style.display = 'none';
-    stepEmail.style.display  = 'block';
-});
-});
-}
+     // “Bundle”
+     if (stepBundle) {
+         // Back → Ownership
+         stepBundle.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepBundle.style.display    = 'none';
+                 stepOwnership.style.display = 'block';
+             });
+         });
 
-    // “Email”
-    if (stepEmail) {
-    // Back → either Bundle or Ownership
-    stepEmail.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepEmail.style.display = 'none';
-    if (ownershipChoice === 'own') {
-    stepBundle.style.display = 'block';
-} else {
-    stepOwnership.style.display = 'block';
-}
-});
-});
+         // Any “next” in Bundle → go to Email
+         stepBundle.querySelectorAll('.next').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 // ownershipChoice stays 'own'
+                 stepBundle.style.display = 'none';
+                 stepEmail.style.display  = 'block';
+             });
+         });
+     }
 
-    // Next → Number
-    const nextFromEmail = stepEmail.querySelector('.right-btn');
-    if (nextFromEmail) {
-    nextFromEmail.addEventListener('click', function() {
-    stepEmail.style.display  = 'none';
-    stepNumber.style.display = 'block';
-});
-}
-}
+     // “Email”
+     if (stepEmail) {
+         // Back → either Bundle or Ownership
+         stepEmail.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepEmail.style.display = 'none';
+                 if (ownershipChoice === 'own') {
+                     stepBundle.style.display = 'block';
+                 } else {
+                     stepOwnership.style.display = 'block';
+                 }
+             });
+         });
 
-    // “Number”
-    if (stepNumber) {
-    // Back → Email
-    stepNumber.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepNumber.style.display = 'none';
-    stepEmail.style.display  = 'block';
-});
-});
-}
+         // Next → Number
+         const nextFromEmail = stepEmail.querySelector('.right-btn');
+         if (nextFromEmail) {
+             nextFromEmail.addEventListener('click', function() {
+                 stepEmail.style.display  = 'none';
+                 stepNumber.style.display = 'block';
+             });
+         }
+     }
 
-    // ──────────────────────────────────────────────────────────────────────────
-    // 2) Driver Details: Gender → Birth Month → Birth Year → Married → Incidents
-    // ──────────────────────────────────────────────────────────────────────────
+     // “Number”
+     if (stepNumber) {
+         // Back → Email
+         stepNumber.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepNumber.style.display = 'none';
+                 stepEmail.style.display  = 'block';
+             });
+         });
+     }
 
-    // “Gender” → “Birth Month”
-    if (stepGender) {
-    stepGender.querySelectorAll('.form--optionPill--aoYkm').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepGender.style.display      = 'none';
-    stepBirthMonth.style.display  = 'block';
-});
-});
-}
+     // ──────────────────────────────────────────────────────────────────────────
+     // 2) Driver Details: Gender → Birth Month → Birth Year → Married → Incidents
+     // ──────────────────────────────────────────────────────────────────────────
 
-    // “Birth Month”
-    if (stepBirthMonth) {
-    // Back → Gender
-    stepBirthMonth.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepBirthMonth.style.display = 'none';
-    stepGender.style.display     = 'block';
-});
-});
+     // “Gender” → “Birth Month”
+     if (stepGender) {
+         stepGender.querySelectorAll('.form--optionPill--aoYkm').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepGender.style.display      = 'none';
+                 stepBirthMonth.style.display  = 'block';
+             });
+         });
+     }
 
-    // Next → Birth Year
-    stepBirthMonth.querySelectorAll('.form--optionPill--aoYkm').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepBirthMonth.style.display = 'none';
-    stepBirthYear.style.display  = 'block';
-});
-});
-}
+     // “Birth Month”
+     if (stepBirthMonth) {
+         // Back → Gender
+         stepBirthMonth.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepBirthMonth.style.display = 'none';
+                 stepGender.style.display     = 'block';
+             });
+         });
 
-    // “Birth Year”
-    if (stepBirthYear) {
-    // Back → Birth Month
-    stepBirthYear.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepBirthYear.style.display   = 'none';
-    stepBirthMonth.style.display  = 'block';
-});
-});
+         // Next → Birth Year
+         stepBirthMonth.querySelectorAll('.form--optionPill--aoYkm').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepBirthMonth.style.display = 'none';
+                 stepBirthYear.style.display  = 'block';
+             });
+         });
+     }
 
-    // Next → Married
-    stepBirthYear.querySelectorAll('.form--optionPill--aoYkm').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepBirthYear.style.display = 'none';
-    stepMarried.style.display   = 'block';
-});
-});
-}
+     // “Birth Year”
+     if (stepBirthYear) {
+         // Back → Birth Month
+         stepBirthYear.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepBirthYear.style.display   = 'none';
+                 stepBirthMonth.style.display  = 'block';
+             });
+         });
 
-    // “Married”
-    if (stepMarried) {
-    // Back → Birth Year
-    stepMarried.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepMarried.style.display    = 'none';
-    stepBirthYear.style.display  = 'block';
-});
-});
+         // Next → Married
+         stepBirthYear.querySelectorAll('.form--optionPill--aoYkm').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepBirthYear.style.display = 'none';
+                 stepMarried.style.display   = 'block';
+             });
+         });
+     }
 
-    // Next → Incidents
-    stepMarried.querySelectorAll('.form--optionPill--aoYkm').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepMarried.style.display   = 'none';
-    stepIncidents.style.display = 'block';
-});
-});
-}
+     // “Married”
+     if (stepMarried) {
+         // Back → Birth Year
+         stepMarried.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepMarried.style.display    = 'none';
+                 stepBirthYear.style.display  = 'block';
+             });
+         });
 
-    // “Incidents”
-    if (stepIncidents) {
-    // Back → Married
-    stepIncidents.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepIncidents.style.display = 'none';
-    stepMarried.style.display   = 'block';
-});
-});
+         // Next → Incidents
+         stepMarried.querySelectorAll('.form--optionPill--aoYkm').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepMarried.style.display   = 'none';
+                 stepIncidents.style.display = 'block';
+             });
+         });
+     }
 
-    // Next → detailAccident / detailTicket / detailDui / final name step
-    const nextFromIncidents = stepIncidents.querySelector('.right-btn');
-    if (nextFromIncidents) {
-    nextFromIncidents.addEventListener('click', function() {
-    const accident = document.querySelector('input[name="accident"]:checked').value;
-    const ticket   = document.querySelector('input[name="ticket"]:checked').value;
-    const dui      = document.querySelector('input[name="dui"]:checked').value;
+     // “Incidents”
+     if (stepIncidents) {
+         // Back → Married
+         stepIncidents.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepIncidents.style.display = 'none';
+                 stepMarried.style.display   = 'block';
+             });
+         });
 
-    stepIncidents.style.display = 'none';
-    if (accident === 'yes') {
-    stepDetailAccident.style.display = 'block';
-}
-    else if (ticket === 'yes') {
-    stepDetailTicket.style.display   = 'block';
-}
-    else if (dui === 'yes') {
-    stepDetailDui.style.display       = 'block';
-}
-    else {
-    // No incidents → choose Name or RelName based on driverCount
-    if (driverCount === 1) {
-    stepNameDriver.style.display = 'block';
-} else if (driverCount > 1) {
-    stepRelName.style.display    = 'block';
-} else {
-    stepNameDriver.style.display = 'block';
-}
-}
-});
-}
-}
+         // Next → detailAccident / detailTicket / detailDui / final name step
+         const nextFromIncidents = stepIncidents.querySelector('.right-btn');
+         if (nextFromIncidents) {
+             nextFromIncidents.addEventListener('click', function() {
+                 const accident = document.querySelector('input[name="accident"]:checked').value;
+                 const ticket   = document.querySelector('input[name="ticket"]:checked').value;
+                 const dui      = document.querySelector('input[name="dui"]:checked').value;
 
-    // ──────────────────────────────────────────────────────────────────────────
-    // 3) detailAccident → detailTicket / detailDui / final name step
-    // ──────────────────────────────────────────────────────────────────────────
-    if (stepDetailAccident) {
-    // Back → Incidents
-    stepDetailAccident.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepDetailAccident.style.display = 'none';
-    stepIncidents.style.display      = 'block';
-});
-});
+                 stepIncidents.style.display = 'none';
+                 if (accident === 'yes') {
+                     stepDetailAccident.style.display = 'block';
+                 }
+                 else if (ticket === 'yes') {
+                     stepDetailTicket.style.display   = 'block';
+                 }
+                 else if (dui === 'yes') {
+                     stepDetailDui.style.display       = 'block';
+                 }
+                 else {
+                     // No incidents → choose Name or RelName based on driverCount
+                     if (driverCount === 1) {
+                         stepNameDriver.style.display = 'block';
+                     } else if (driverCount > 1) {
+                         stepRelName.style.display    = 'block';
+                     } else {
+                         stepNameDriver.style.display = 'block';
+                     }
+                 }
+             });
+         }
+     }
 
-    // Next → detailTicket / detailDui / final name step
-    const nextAccidentBtn = stepDetailAccident.querySelector('.right-btn');
-    if (nextAccidentBtn) {
-    nextAccidentBtn.addEventListener('click', function() {
-    const ticket = document.querySelector('input[name="ticket"]:checked').value;
-    const dui    = document.querySelector('input[name="dui"]:checked').value;
+     // ──────────────────────────────────────────────────────────────────────────
+     // 3) detailAccident → detailTicket / detailDui / final name step
+     // ──────────────────────────────────────────────────────────────────────────
+     if (stepDetailAccident) {
+         // Back → Incidents
+         stepDetailAccident.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepDetailAccident.style.display = 'none';
+                 stepIncidents.style.display      = 'block';
+             });
+         });
 
-    stepDetailAccident.style.display = 'none';
-    if (ticket === 'yes') {
-    stepDetailTicket.style.display = 'block';
-}
-    else if (dui === 'yes') {
-    stepDetailDui.style.display = 'block';
-}
-    else {
-    if (driverCount === 1) {
-    stepNameDriver.style.display = 'block';
-} else if (driverCount > 1) {
-    stepRelName.style.display    = 'block';
-} else {
-    stepNameDriver.style.display = 'block';
-}
-}
-});
-}
-}
+         // Next → detailTicket / detailDui / final name step
+         const nextAccidentBtn = stepDetailAccident.querySelector('.right-btn');
+         if (nextAccidentBtn) {
+             nextAccidentBtn.addEventListener('click', function() {
+                 const ticket = document.querySelector('input[name="ticket"]:checked').value;
+                 const dui    = document.querySelector('input[name="dui"]:checked').value;
 
-    // ──────────────────────────────────────────────────────────────────────────
-    // 4) detailTicket → detailAccident / Incidents → detailDui / final name step
-    // ──────────────────────────────────────────────────────────────────────────
-    if (stepDetailTicket) {
-    // Back → detailAccident or Incidents
-    stepDetailTicket.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepDetailTicket.style.display = 'none';
-    const accident = document.querySelector('input[name="accident"]:checked').value;
-    if (accident === 'yes') {
-    stepDetailAccident.style.display = 'block';
-} else {
-    stepIncidents.style.display = 'block';
-}
-});
-});
+                 stepDetailAccident.style.display = 'none';
+                 if (ticket === 'yes') {
+                     stepDetailTicket.style.display = 'block';
+                 }
+                 else if (dui === 'yes') {
+                     stepDetailDui.style.display = 'block';
+                 }
+                 else {
+                     if (driverCount === 1) {
+                         stepNameDriver.style.display = 'block';
+                     } else if (driverCount > 1) {
+                         stepRelName.style.display    = 'block';
+                     } else {
+                         stepNameDriver.style.display = 'block';
+                     }
+                 }
+             });
+         }
+     }
 
-    // Next → detailDui or final name step
-    const nextTicketBtn = stepDetailTicket.querySelector('.right-btn');
-    if (nextTicketBtn) {
-    nextTicketBtn.addEventListener('click', function() {
-    const dui = document.querySelector('input[name="dui"]:checked').value;
-    stepDetailTicket.style.display = 'none';
+     // ──────────────────────────────────────────────────────────────────────────
+     // 4) detailTicket → detailAccident / Incidents → detailDui / final name step
+     // ──────────────────────────────────────────────────────────────────────────
+     if (stepDetailTicket) {
+         // Back → detailAccident or Incidents
+         stepDetailTicket.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepDetailTicket.style.display = 'none';
+                 const accident = document.querySelector('input[name="accident"]:checked').value;
+                 if (accident === 'yes') {
+                     stepDetailAccident.style.display = 'block';
+                 } else {
+                     stepIncidents.style.display = 'block';
+                 }
+             });
+         });
 
-    if (dui === 'yes') {
-    stepDetailDui.style.display = 'block';
-} else {
-    if (driverCount === 1) {
-    stepNameDriver.style.display = 'block';
-} else if (driverCount > 1) {
-    stepRelName.style.display    = 'block';
-} else {
-    stepNameDriver.style.display = 'block';
-}
-}
-});
-}
-}
+         // Next → detailDui or final name step
+         const nextTicketBtn = stepDetailTicket.querySelector('.right-btn');
+         if (nextTicketBtn) {
+             nextTicketBtn.addEventListener('click', function() {
+                 const dui = document.querySelector('input[name="dui"]:checked').value;
+                 stepDetailTicket.style.display = 'none';
 
-    // ──────────────────────────────────────────────────────────────────────────
-    // 5) detailDui → detailTicket / detailAccident / Incidents → final name step
-    // ──────────────────────────────────────────────────────────────────────────
-    if (stepDetailDui) {
-    // Back → detailTicket / detailAccident / Incidents
-    stepDetailDui.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepDetailDui.style.display = 'none';
-    const ticket   = document.querySelector('input[name="ticket"]:checked').value;
-    const accident = document.querySelector('input[name="accident"]:checked').value;
-    if (ticket === 'yes') {
-    stepDetailTicket.style.display = 'block';
-}
-    else if (accident === 'yes') {
-    stepDetailAccident.style.display = 'block';
-}
-    else {
-    stepIncidents.style.display = 'block';
-}
-});
-});
+                 if (dui === 'yes') {
+                     stepDetailDui.style.display = 'block';
+                 } else {
+                     if (driverCount === 1) {
+                         stepNameDriver.style.display = 'block';
+                     } else if (driverCount > 1) {
+                         stepRelName.style.display    = 'block';
+                     } else {
+                         stepNameDriver.style.display = 'block';
+                     }
+                 }
+             });
+         }
+     }
 
-    // Next → final name step
-    const nextDuiBtn = stepDetailDui.querySelector('.right-btn');
-    if (nextDuiBtn) {
-    nextDuiBtn.addEventListener('click', function() {
-    stepDetailDui.style.display = 'none';
-    if (driverCount === 1) {
-    stepNameDriver.style.display = 'block';
-} else if (driverCount > 1) {
-    stepRelName.style.display    = 'block';
-} else {
-    stepNameDriver.style.display = 'block';
-}
-});
-}
-}
+     // ──────────────────────────────────────────────────────────────────────────
+     // 5) detailDui → detailTicket / detailAccident / Incidents → final name step
+     // ──────────────────────────────────────────────────────────────────────────
+     if (stepDetailDui) {
+         // Back → detailTicket / detailAccident / Incidents
+         stepDetailDui.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepDetailDui.style.display = 'none';
+                 const ticket   = document.querySelector('input[name="ticket"]:checked').value;
+                 const accident = document.querySelector('input[name="accident"]:checked').value;
+                 if (ticket === 'yes') {
+                     stepDetailTicket.style.display = 'block';
+                 }
+                 else if (accident === 'yes') {
+                     stepDetailAccident.style.display = 'block';
+                 }
+                 else {
+                     stepIncidents.style.display = 'block';
+                 }
+             });
+         });
 
-    // ──────────────────────────────────────────────────────────────────────────
-    // 6) “Driver Name” step (stepNameDriver) → back to AddDriver
-    // ──────────────────────────────────────────────────────────────────────────
-    if (stepNameDriver) {
-    // Back → Incidents (fallback)
-    stepNameDriver.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepNameDriver.style.display = 'none';
-    stepIncidents.style.display  = 'block';
-});
-});
+         // Next → final name step
+         const nextDuiBtn = stepDetailDui.querySelector('.right-btn');
+         if (nextDuiBtn) {
+             nextDuiBtn.addEventListener('click', function() {
+                 stepDetailDui.style.display = 'none';
+                 if (driverCount === 1) {
+                     stepNameDriver.style.display = 'block';
+                 } else if (driverCount > 1) {
+                     stepRelName.style.display    = 'block';
+                 } else {
+                     stepNameDriver.style.display = 'block';
+                 }
+             });
+         }
+     }
 
-    // Next → AddDriver (to add another driver)
-    const nextFromNameDriver = stepNameDriver.querySelector('.right-btn');
-    if (nextFromNameDriver) {
-    nextFromNameDriver.addEventListener('click', function() {
-    stepNameDriver.style.display = 'none';
-    stepAddDriver.style.display  = 'block';
-});
-}
-}
+     // ──────────────────────────────────────────────────────────────────────────
+     // 6) “Driver Name” step (stepNameDriver) → back to AddDriver
+     // ──────────────────────────────────────────────────────────────────────────
+     if (stepNameDriver) {
+         // Back → Incidents (fallback)
+         stepNameDriver.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepNameDriver.style.display = 'none';
+                 stepIncidents.style.display  = 'block';
+             });
+         });
 
-    // ──────────────────────────────────────────────────────────────────────────
-    // 7) “Relation / Driver Name” step (stepRelName) → back to AddDriver
-    // ──────────────────────────────────────────────────────────────────────────
-    if (stepRelName) {
-    // Back → Incidents (fallback)
-    stepRelName.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-    stepRelName.style.display  = 'none';
-    stepIncidents.style.display = 'block';
-});
-});
+         // Next → AddDriver (to add another driver)
+         const nextFromNameDriver = stepNameDriver.querySelector('.right-btn');
+         if (nextFromNameDriver) {
+             nextFromNameDriver.addEventListener('click', function() {
+                 stepNameDriver.style.display = 'none';
+                 stepAddDriver.style.display  = 'block';
+             });
+         }
+     }
 
-    // Next → AddDriver (to add another driver)
-    const nextFromRelName = stepRelName.querySelector('.right-btn');
-    if (nextFromRelName) {
-    nextFromRelName.addEventListener('click', function() {
-    stepRelName.style.display    = 'none';
-    stepAddDriver.style.display  = 'block';
-});
-}
-}
-});
+     // ──────────────────────────────────────────────────────────────────────────
+     // 7) “Relation / Driver Name” step (stepRelName) → back to AddDriver
+     // ──────────────────────────────────────────────────────────────────────────
+     if (stepRelName) {
+         // Back → Incidents (fallback)
+         stepRelName.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+                 stepRelName.style.display  = 'none';
+                 stepIncidents.style.display = 'block';
+             });
+         });
 
-
-
+         // Next → AddDriver (to add another driver)
+         const nextFromRelName = stepRelName.querySelector('.right-btn');
+         if (nextFromRelName) {
+             nextFromRelName.addEventListener('click', function() {
+                 stepRelName.style.display    = 'none';
+                 stepAddDriver.style.display  = 'block';
+             });
+         }
+     }
+ });
 
 
-    // // ?????????
+
+
+     document.addEventListener('DOMContentLoaded', function() {
+     // ──────────────────────────────────────────────────────────────────────────
+     // PART A: PROGRESS BAR UPDATE FUNCTION
+     // ──────────────────────────────────────────────────────────────────────────
+
+     // 1) Map each logical “step” → percent
+     const stepToPercent = {
+     make:            25,
+     year:            37,
+     model:           48,
+     trim:            57,
+     own:             59,
+     addvehicle:      68,
+     insured:         79,
+     ownhouse:        81,
+
+     // Under $step === 'gender', we’ll override by checking the sub-DIV
+     gender:          87,    // fallback only
+     birthmonth:      88,
+     birthday:        90,
+     birthyear:       91,
+     married:         93,
+     incidents:       94,    // <div id="step-incidents">
+     detailaccident:  94,    // <div id="step-detailAccident">
+     detailticket:    94,    // <div id="step-detailTicket">
+     detaildui:       94,    // <div id="step-detailDui">
+
+     name:            96,    // <div id="step-name">
+     relname:         96,    // <div id="step-relName">
+     adddriver:       96,    // <div id="step-addDriver">
+
+     address:         97,    // <div id="step-address">
+     ownership:       97,    // <div id="step-ownership">
+     bundle:          97,    // <div id="step-bundle">
+
+     email:           98,    // <div id="step-email">
+     number:          99     // <div id="step-number">
+ };
+
+     // 2) Two “loop” sets that freeze the bar
+     const vehicleWizardSteps = [
+     'make','year','model','trim','own','addvehicle'
+     ];
+     const driverWizardSteps = [
+     'gender','birthmonth','birthyear','married','incidents',
+     'detailaccident','detailticket','detaildui',
+     'name','relname','adddriver'
+     ];
+
+     // 3) Detect which “step-…” <div> is currently visible
+     function detectVisibleSubStep() {
+     const candidateIds = [
+     'step-gender',
+     'step-birthMonth',
+     'step-birthYear',
+     'step-birthDay',
+     'step-married',
+     'step-incidents',
+     'step-detailAccident',
+     'step-detailTicket',
+     'step-detailDui',
+     'step-name',
+     'step-relName',
+     'step-addDriver',
+     'step-address',
+     'step-ownership',
+     'step-bundle',
+     'step-email',
+     'step-number'
+     ];
+     for (let id of candidateIds) {
+     const el = document.getElementById(id);
+     if (el && getComputedStyle(el).display !== 'none') {
+     return id.replace(/^step-/, '').toLowerCase();
+ }
+ }
+     return null;
+ }
+
+     // 4) Read “lastClick” from localStorage (“addVehicle” or “addDriver” or null)
+     function getLastClick() {
+     const val = localStorage.getItem('lastClick');
+     return (val === 'addVehicle' || val === 'addDriver') ? val : null;
+ }
+
+     // 5) Recalculate & redraw progress bar
+     function updateProgress() {
+     // a) Determine raw step from Blade
+     let curStepRaw = (window.currentStep || '').trim().toLowerCase();
+     let curStep = curStepRaw;
+
+     // b) If in "gender" block, find sub-step DIV
+     if (curStepRaw === 'gender') {
+     const sub = detectVisibleSubStep();
+     if (sub) {
+     curStep = sub;
+ }
+ }
+
+     // c) Look up percent
+     const currentPercent = stepToPercent[curStep] || 0;
+
+     // d) Read previous state
+     let lastClick   = getLastClick();
+     let maxProgress = parseInt(localStorage.getItem('maxProgress') || '0', 10);
+     if (isNaN(maxProgress)) maxProgress = 0;
+
+     // e) Freeze logic
+     if (lastClick === 'addVehicle' && vehicleWizardSteps.includes(curStep)) {
+     maxProgress = 68;
+     localStorage.setItem('maxProgress', '68');
+ }
+     else if (lastClick === 'addDriver' && driverWizardSteps.includes(curStep)) {
+     maxProgress = 96;
+     localStorage.setItem('maxProgress', '96');
+ }
+     else {
+     // Exited any loop
+     localStorage.removeItem('lastClick');
+     maxProgress = currentPercent;
+     localStorage.setItem('maxProgress', maxProgress.toString());
+ }
+
+     // f) Redraw bar
+     const fillElem  = document.querySelector('.progress-bar-fill');
+     const labelElem = document.querySelector('.progress-bar-label');
+     if (fillElem && labelElem) {
+     fillElem.style.width  = maxProgress + '%';
+     labelElem.style.left  = maxProgress + '%';
+     labelElem.textContent = maxProgress + '%';
+ }
+ }
+
+     // Immediately update on page load
+     updateProgress();
+
+
+
+     // ──────────────────────────────────────────────────────────────────────────
+     // PART B: EXISTING ROUTING SCRIPT WITH updateProgress() CALLS ADDED
+     // ──────────────────────────────────────────────────────────────────────────
+
+     // Cache each step‐wrapper by ID
+     const stepGender         = document.getElementById('step-gender');
+     const stepBirthMonth     = document.getElementById('step-birthMonth');
+     const stepBirthYear      = document.getElementById('step-birthYear');
+     const stepBirthDay       = document.getElementById('step-birthDay');
+     const stepMarried        = document.getElementById('step-married');
+     const stepIncidents      = document.getElementById('step-incidents');
+     const stepDetailAccident = document.getElementById('step-detailAccident');
+     const stepDetailTicket   = document.getElementById('step-detailTicket');
+     const stepDetailDui      = document.getElementById('step-detailDui');
+     const stepNameDriver     = document.getElementById('step-name');      // “Driver Name”
+     const stepRelName        = document.getElementById('step-relName');   // “Relation/Driver Name”
+     const stepAddDriver      = document.getElementById('step-addDriver');
+     const stepAddress        = document.getElementById('step-address');
+     const stepOwnership      = document.getElementById('step-ownership');
+     const stepBundle         = document.getElementById('step-bundle');
+     const stepEmail          = document.getElementById('step-email');
+     const stepNumber         = document.getElementById('step-number');
+
+     let driverCount     = 1;
+     let ownershipChoice = null;
+
+     function getOrdinalSuffix(n) {
+     const rem100 = n % 100;
+     if (rem100 >= 11 && rem100 <= 13) return 'TH';
+     const rem10 = n % 10;
+     if (rem10 === 1) return 'ST';
+     if (rem10 === 2) return 'ND';
+     if (rem10 === 3) return 'RD';
+     return 'TH';
+ }
+
+     function updateDriverHeaders(count) {
+     const suffix = getOrdinalSuffix(count);
+     const text   = `${count}${suffix} DRIVER`;
+     [
+     stepGender,
+     stepBirthMonth,
+     stepBirthYear,
+     stepBirthDay,
+     stepMarried,
+     stepIncidents,
+     stepDetailAccident,
+     stepDetailTicket,
+     stepDetailDui,
+     stepNameDriver,
+     stepRelName
+     ].forEach(function(step) {
+     if (!step) return;
+     const h5 = step.querySelector('h5.center-title');
+     if (h5) h5.textContent = text;
+ });
+ }
+
+     // “Vehicle Name” (step-name) → “AddDriver”
+     if (stepNameDriver) {
+     const nextFromName = stepNameDriver.querySelector('.right-btn');
+     if (nextFromName) {
+     nextFromName.addEventListener('click', function() {
+     stepNameDriver.style.display = 'none';
+     stepAddDriver.style.display  = 'block';
+     updateProgress();
+ });
+ }
+     stepNameDriver.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepNameDriver.style.display = 'none';
+     stepIncidents.style.display  = 'block';
+     updateProgress();
+ });
+ });
+ }
+
+     // “AddDriver” step
+     if (stepAddDriver) {
+     // Back → Vehicle Name
+     stepAddDriver.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepAddDriver.style.display    = 'none';
+     stepNameDriver.style.display   = 'block';
+     updateProgress();
+ });
+ });
+
+     // “Yes” → increment driverCount, update headers, go to Gender
+     const btnYes = stepAddDriver.querySelector('.addDriverYes');
+     if (btnYes) {
+     btnYes.addEventListener('click', function() {
+     driverCount += 1;
+     updateDriverHeaders(driverCount);
+     localStorage.setItem('lastClick', 'addDriver');
+     stepAddDriver.style.display = 'none';
+     stepGender.style.display    = 'block';
+     updateProgress();
+ });
+ }
+
+     // “No” → skip driver flow, go to Address
+     const btnNo = stepAddDriver.querySelector('.addDriverNo');
+     if (btnNo) {
+     btnNo.addEventListener('click', function() {
+     stepAddDriver.style.display = 'none';
+     stepAddress.style.display   = 'block';
+     updateProgress();
+ });
+ }
+ }
+
+     // “Address”
+     if (stepAddress) {
+     // Back → AddDriver
+     stepAddress.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepAddress.style.display   = 'none';
+     stepAddDriver.style.display = 'block';
+     updateProgress();
+ });
+ });
+     // Next → Ownership
+     const nextFromAddress = stepAddress.querySelector('.right-btn');
+     if (nextFromAddress) {
+     nextFromAddress.addEventListener('click', function() {
+     stepAddress.style.display   = 'none';
+     stepOwnership.style.display = 'block';
+     updateProgress();
+ });
+ }
+ }
+
+     // “Ownership”
+     if (stepOwnership) {
+     // Back → Address
+     stepOwnership.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepOwnership.style.display = 'none';
+     stepAddress.style.display   = 'block';
+     updateProgress();
+ });
+ });
+
+     // “OWN” → go to Bundle
+     const btnOwn = stepOwnership.querySelector('.own');
+     if (btnOwn) {
+     btnOwn.addEventListener('click', function() {
+     ownershipChoice = 'own';
+     stepOwnership.style.display = 'none';
+     stepBundle.style.display    = 'block';
+     updateProgress();
+ });
+ }
+
+     // “RENT” and “OTHER” → go to Email
+     stepOwnership.querySelectorAll('.next').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     ownershipChoice = 'skip';
+     stepOwnership.style.display = 'none';
+     stepEmail.style.display     = 'block';
+     updateProgress();
+ });
+ });
+ }
+
+     // “Bundle”
+     if (stepBundle) {
+     // Back → Ownership
+     stepBundle.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepBundle.style.display    = 'none';
+     stepOwnership.style.display = 'block';
+     updateProgress();
+ });
+ });
+     // Any “next” → Email
+     stepBundle.querySelectorAll('.next').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepBundle.style.display = 'none';
+     stepEmail.style.display  = 'block';
+     updateProgress();
+ });
+ });
+ }
+
+     // “Email”
+     if (stepEmail) {
+     // Back → either Bundle or Ownership
+     stepEmail.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepEmail.style.display = 'none';
+     if (ownershipChoice === 'own') {
+     stepBundle.style.display = 'block';
+ } else {
+     stepOwnership.style.display = 'block';
+ }
+     updateProgress();
+ });
+ });
+     // Next → Number
+     const nextFromEmail = stepEmail.querySelector('.right-btn');
+     if (nextFromEmail) {
+     nextFromEmail.addEventListener('click', function() {
+     stepEmail.style.display  = 'none';
+     stepNumber.style.display = 'block';
+     updateProgress();
+ });
+ }
+ }
+
+     // “Number”
+     if (stepNumber) {
+     // Back → Email
+     stepNumber.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepNumber.style.display = 'none';
+     stepEmail.style.display  = 'block';
+     updateProgress();
+ });
+ });
+ }
+
+     // ──────────────────────────────────────────────────────────────────────────
+     // PART B2: DRIVER DETAILS (GENDER → BIRTHMONTH → BIRTHYEAR → MARRIED → INCIDENTS)
+     // ──────────────────────────────────────────────────────────────────────────
+
+     if (stepGender) {
+     stepGender.querySelectorAll('.form--optionPill--aoYkm').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepGender.style.display      = 'none';
+     stepBirthMonth.style.display  = 'block';
+     updateProgress();
+ });
+ });
+ }
+
+     if (stepBirthMonth) {
+     // Back → Gender
+     stepBirthMonth.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepBirthMonth.style.display = 'none';
+     stepGender.style.display     = 'block';
+     updateProgress();
+ });
+ });
+     // Next → BirthYear
+     stepBirthMonth.querySelectorAll('.form--optionPill--aoYkm').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepBirthMonth.style.display = 'none';
+     stepBirthYear.style.display  = 'block';
+     updateProgress();
+ });
+ });
+ }
+
+     if (stepBirthYear) {
+     // Back → BirthMonth
+     stepBirthYear.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepBirthYear.style.display   = 'none';
+     stepBirthMonth.style.display  = 'block';
+     updateProgress();
+ });
+ });
+     // Next → Married
+     stepBirthYear.querySelectorAll('.form--optionPill--aoYkm').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepBirthYear.style.display = 'none';
+     stepMarried.style.display   = 'block';
+     updateProgress();
+ });
+ });
+ }
+
+     if (stepMarried) {
+     // Back → BirthYear
+     stepMarried.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepMarried.style.display    = 'none';
+     stepBirthYear.style.display  = 'block';
+     updateProgress();
+ });
+ });
+     // Next → Incidents
+     stepMarried.querySelectorAll('.form--optionPill--aoYkm').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepMarried.style.display   = 'none';
+     stepIncidents.style.display = 'block';
+     updateProgress();
+ });
+ });
+ }
+
+     if (stepIncidents) {
+     // Back → Married
+     stepIncidents.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepIncidents.style.display = 'none';
+     stepMarried.style.display   = 'block';
+     updateProgress();
+ });
+ });
+     // Next → detailAccident / detailTicket / detailDui / name/relName
+     const nextFromIncidents = stepIncidents.querySelector('.right-btn');
+     if (nextFromIncidents) {
+     nextFromIncidents.addEventListener('click', function() {
+     const accident = document.querySelector('input[name="accident"]:checked').value;
+     const ticket   = document.querySelector('input[name="ticket"]:checked').value;
+     const dui      = document.querySelector('input[name="dui"]:checked').value;
+
+     stepIncidents.style.display = 'none';
+     if (accident === 'yes') {
+     stepDetailAccident.style.display = 'block';
+ }
+     else if (ticket === 'yes') {
+     stepDetailTicket.style.display   = 'block';
+ }
+     else if (dui === 'yes') {
+     stepDetailDui.style.display       = 'block';
+ }
+     else {
+     if (driverCount === 1) {
+     stepNameDriver.style.display = 'block';
+ } else {
+     stepRelName.style.display    = 'block';
+ }
+ }
+     updateProgress();
+ });
+ }
+ }
+
+     if (stepDetailAccident) {
+     // Back → Incidents
+     stepDetailAccident.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepDetailAccident.style.display = 'none';
+     stepIncidents.style.display      = 'block';
+     updateProgress();
+ });
+ });
+     // Next → detailTicket / detailDui / name/relName
+     const nextAccidentBtn = stepDetailAccident.querySelector('.right-btn');
+     if (nextAccidentBtn) {
+     nextAccidentBtn.addEventListener('click', function() {
+     const ticket = document.querySelector('input[name="ticket"]:checked').value;
+     const dui    = document.querySelector('input[name="dui"]:checked').value;
+
+     stepDetailAccident.style.display = 'none';
+     if (ticket === 'yes') {
+     stepDetailTicket.style.display = 'block';
+ }
+     else if (dui === 'yes') {
+     stepDetailDui.style.display = 'block';
+ }
+     else {
+     if (driverCount === 1) {
+     stepNameDriver.style.display = 'block';
+ } else {
+     stepRelName.style.display    = 'block';
+ }
+ }
+     updateProgress();
+ });
+ }
+ }
+
+     if (stepDetailTicket) {
+     // Back → detailAccident or Incidents
+     stepDetailTicket.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepDetailTicket.style.display = 'none';
+     const accident = document.querySelector('input[name="accident"]:checked').value;
+     if (accident === 'yes') {
+     stepDetailAccident.style.display = 'block';
+ } else {
+     stepIncidents.style.display = 'block';
+ }
+     updateProgress();
+ });
+ });
+     // Next → detailDui or name/relName
+     const nextTicketBtn = stepDetailTicket.querySelector('.right-btn');
+     if (nextTicketBtn) {
+     nextTicketBtn.addEventListener('click', function() {
+     const dui = document.querySelector('input[name="dui"]:checked').value;
+     stepDetailTicket.style.display = 'none';
+
+     if (dui === 'yes') {
+     stepDetailDui.style.display = 'block';
+ } else {
+     if (driverCount === 1) {
+     stepNameDriver.style.display = 'block';
+ } else {
+     stepRelName.style.display    = 'block';
+ }
+ }
+     updateProgress();
+ });
+ }
+ }
+
+     if (stepDetailDui) {
+     // Back → detailTicket / detailAccident / Incidents
+     stepDetailDui.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepDetailDui.style.display = 'none';
+     const ticket   = document.querySelector('input[name="ticket"]:checked').value;
+     const accident = document.querySelector('input[name="accident"]:checked').value;
+     if (ticket === 'yes') {
+     stepDetailTicket.style.display = 'block';
+ }
+     else if (accident === 'yes') {
+     stepDetailAccident.style.display = 'block';
+ }
+     else {
+     stepIncidents.style.display = 'block';
+ }
+     updateProgress();
+ });
+ });
+     // Next → name/relName
+     const nextDuiBtn = stepDetailDui.querySelector('.right-btn');
+     if (nextDuiBtn) {
+     nextDuiBtn.addEventListener('click', function() {
+     stepDetailDui.style.display = 'none';
+     if (driverCount === 1) {
+     stepNameDriver.style.display = 'block';
+ } else {
+     stepRelName.style.display    = 'block';
+ }
+     updateProgress();
+ });
+ }
+ }
+
+     if (stepNameDriver) {
+     // Back → Incidents
+     stepNameDriver.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepNameDriver.style.display = 'none';
+     stepIncidents.style.display  = 'block';
+     updateProgress();
+ });
+ });
+     // Next → AddDriver
+     const nextFromNameDriver = stepNameDriver.querySelector('.right-btn');
+     if (nextFromNameDriver) {
+     nextFromNameDriver.addEventListener('click', function() {
+     stepNameDriver.style.display = 'none';
+     stepAddDriver.style.display  = 'block';
+     updateProgress();
+ });
+ }
+ }
+
+     if (stepRelName) {
+     // Back → Incidents
+     stepRelName.querySelectorAll('.header-back-abs, .left-btn').forEach(function(btn) {
+     btn.addEventListener('click', function() {
+     stepRelName.style.display   = 'none';
+     stepIncidents.style.display = 'block';
+     updateProgress();
+ });
+ });
+     // Next → AddDriver
+     const nextFromRelName = stepRelName.querySelector('.right-btn');
+     if (nextFromRelName) {
+     nextFromRelName.addEventListener('click', function() {
+     stepRelName.style.display   = 'none';
+     stepAddDriver.style.display = 'block';
+     updateProgress();
+ });
+ }
+ }
+
+     // ──────────────────────────────────────────────────────────────────────────
+     // PART C: “ADD ANOTHER VEHICLE” LINK HOOK
+     // ──────────────────────────────────────────────────────────────────────────
+     const addVehicleLink = document.getElementById('addAnotherVehicle');
+     if (addVehicleLink) {
+     addVehicleLink.addEventListener('click', function() {
+     localStorage.setItem('lastClick', 'addVehicle');
+     // The browser then navigates back to “make,” and updateProgress()
+     // will freeze at 68 until we exit the vehicle loop.
+ });
+ }
+
+ }); // end of DOMContentLoaded
+
+
+// // ?????????
     document.querySelectorAll('.custom-select-floating select').forEach(function(select) {
         select.addEventListener('focus', function() {
             select.classList.add('open');
