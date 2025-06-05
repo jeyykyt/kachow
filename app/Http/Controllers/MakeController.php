@@ -157,59 +157,75 @@ class MakeController extends Controller
         ]);
     }
 
+
     public function showTrims(Make $make, $year, $modelId)
     {
-        // Find the CarModel instance
+        // 1) Find the CarModel instance
         $carModel = CarModel::where('id', $modelId)
             ->where('make_id', $make->id)
             ->first();
 
         if (! $carModel) {
+            // If that model wasn’t found, go back up to the “models” page
             return redirect()->route('make.models', [
                 'make' => $make->id,
                 'year' => $year
             ]);
         }
 
-        // Call CarQuery to get trims
+        // 2) Call CarQuery to fetch trims
         $makeName  = urlencode($make->name);
         $modelName = urlencode($carModel->name);
         $response  = Http::get(
             "https://www.carqueryapi.com/api/0.3/?cmd=getTrims&make={$makeName}&year={$year}&model={$modelName}"
         );
 
-        $json      = $response->json();
-        $trimList  = $json['Trims'] ?? [];
-        $trims     = collect($trimList)
+        $json     = $response->json();
+        $trimList = $json['Trims'] ?? [];
+
+        $trims = collect($trimList)
             ->pluck('model_trim')
-            ->filter()   // remove empty strings
+            ->filter()      // remove empty strings
             ->unique()
             ->sort()
             ->values();
 
-        // Re‐fetch featured/others for “Back” links, etc.
-        $featuredList = [/* … same 12 names … */];
-        $featured     = Make::whereIn('name', $featuredList)
+        // 3) If no trims found, redirect straight to “own” (skipping trim view)
+        if ($trims->isEmpty()) {
+            return redirect()->route('make.own', [
+                'make'            => $make->id,
+                'year'            => $year,
+                'model'           => $carModel->id,
+                'trim'            => 'none',
+            ]);
+        }
+
+        // 4) Otherwise, we _do_ show the trim screen. But we’ll pass a flag “hasTrims”
+        //    so that the “own” view knows to point its Back button back to “trim” instead of “model.”
+        $featuredList = [
+            /* … your same 12 featured make‐names … */
+        ];
+        $featured = Make::whereIn('name', $featuredList)
             ->orderBy('name')
             ->get(['id','name','image_path']);
-        $others       = Make::whereNotIn('name', $featuredList)
+        $others   = Make::whereNotIn('name', $featuredList)
             ->orderBy('name')
             ->get(['id','name','image_path']);
 
         return view('index', [
-            'step'            => 'trim',
-            'featured'        => $featured,
-            'others'          => $others,
-            'make'            => $make,
-            'year'            => $year,
-            'modelObj'        => $carModel,
-            'trims'           => $trims,
-            'selectedMakeId'  => $make->id,
-            'selectedYear'    => $year,
-            'selectedModel'   => $modelId,
+            'step'           => 'trim',
+            'featured'       => $featured,
+            'others'         => $others,
+            'make'           => $make,
+            'year'           => $year,
+            'modelObj'       => $carModel,
+            'trims'          => $trims,
+            'selectedMakeId' => $make->id,
+            'selectedYear'   => $year,
+            'selectedModel'  => $modelId,
+            'hasTrims'       => true,      // Indicate to the view that "trims exist"
         ]);
     }
-
     public function showOwn(Make $make, $year, $model, $trim)
     {
         // 1) Ensure the CarModel belongs to this Make
